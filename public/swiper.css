@@ -1,0 +1,28 @@
+.swiper .swiper-button-prev,
+.swiper .swiper-button-next {
+  color: #0088ff!important;
+  --swiper-navigation-size: 30px;
+  font-weight: bold;
+}
+
+.swiper .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+  background-color: white;
+}
+
+.swiper .swiper-pagination-bullet-active {
+  background-color: #0088ff;
+  opacity: 1
+}
+
+/* react-slick NPM package styling */
+.slick-next:before, .slick-prev:before {
+  color: #0088ff!important;
+  font-size: 24px!important;
+}
+
+.slick-initialized .slick-slide {
+  padding: 0 10px;
+}

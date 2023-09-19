@@ -1,0 +1,78 @@
+The text inside package.json file with script dev
+cross-env NODE_OPTIONS='--inspect' 
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import Layout from '../../components/Layout';
+import styles from '../../styles/account.module.css';
+
+const Create = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  // handle shipping function
+  const shippingSubmitHandler = data => {
+    console.log('DATA FROM SUBMIT HANDLER ==> ', data);
+  };
+
+  return (
+    <Layout title="Shipping Address" description="Shipping address of a user">
+      <Typography variant="h1" component="h1" textAlign="center">
+        Shipping Address
+      </Typography>
+      <Paper className={styles.formLogin}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(shippingSubmitHandler)}
+          autoComplete="off"
+          noValidate
+        >
+          <List>
+            <ListItem>
+              <TextField
+                {...register('productTitle', {
+                  required: true,
+                  minLength: 8,
+                  maxLength: 24,
+                })}
+                label="Full Name"
+                name="productTitle"
+                fullWidth
+                size="small"
+                placeholder="John Doe"
+                inputProps={{ type: 'text' }}
+                variant="outlined"
+                helperText={
+                  errors.fullName?.type === 'required'
+                    ? 'Please enter your full name'
+                    : '' || errors.fullName?.type === 'minLength'
+                    ? 'Please enter at least 8 characters'
+                    : '' || errors.fullName?.type === 'maxLength'
+                    ? "Please don't exceed 24 characters"
+                    : ''
+                }
+              />
+            </ListItem>
+            <ListItem>
+              <Button type="submit" variant="contained" fullWidth>
+                Continue
+              </Button>
+            </ListItem>
+          </List>
+        </Box>
+      </Paper>
+    </Layout>
+  );
+};
+
+export default Create;

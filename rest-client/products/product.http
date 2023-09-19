@@ -1,0 +1,26 @@
+### POST REQUEST products
+POST http://localhost:3000/api/products/create HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0OWQ5YjE5NThjYzY2YTUwOWNlMzUiLCJuYW1lIjoiQWRtaW4gdXNlciIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2OTE2Njk5OTcsImV4cCI6MTY5NDI2MTk5N30.TMGVvYm9_lLLp4nptdIXgHn8yxFAUdqDbMmCUEccqDQ
+
+{
+  "title": "fsdf sfsdf sdfsd fsdf sdfsd fsd",
+  "slug": "fsdf-sfsdf-sdfsd-fsdf-sdfsd-fsd",
+  "shortDescription": "Department ‎ B0C6FVLCH1 fdsf sdf sdfsd",
+  "description": "3 + 1 = a whole new icon. Celebrating 35 years of the Air Jordan 3",
+  "price": 129.42,
+  "categories": "Compouter",
+  "images": [
+    "../../public/images/dog.png"
+  ],
+  "shipping": "Yes",
+  "color": "Multi",
+  "brand": "Nike",
+  "size": "All",
+  "countInStock": 365,
+  "sold": 145,
+}
+
+### GET REQUEST
+GET http://localhost:3000/api/products/view HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ0OWQ5YjE5NThjYzY2YTUwOWNlMzUiLCJuYW1lIjoiQWRtaW4gdXNlciIsImVtYWlsIjoiYWRtaW5AZXhhbXBsZS5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2OTE2Njk5OTcsImV4cCI6MTY5NDI2MTk5N30.TMGVvYm9_lLLp4nptdIXgHn8yxFAUdqDbMmCUEccqDQ

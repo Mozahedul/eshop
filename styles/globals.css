@@ -1,0 +1,146 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto', sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    color: white;
+    background: black;
+  }
+}
+
+/* Image sldier for brands */
+#sliderContainer {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.slider {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.slider img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin: 15px;
+  box-shadow: 1px 1px 5px 2px rgba(180, 180, 180, 0.2);
+  border-radius: 4px;
+}
+
+.slider img:first-child {
+  margin-left: 0;
+}
+
+.slider img:last-child {
+  margin-right: 0;
+}
+
+#previous {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(0, -50%);
+}
+
+#next {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+}
+
+#previous,
+#next {
+  outline: none;
+  border: none;
+  background-color: black;
+  color: white;
+  height: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+}
+
+#previous:disabled,
+#next:disabled {
+  background-color: lightgrey;
+  cursor: not-allowed;
+}
+
+.active {
+  border: 2px solid #cf9e17;
+}
+
+/* .Magnifier {
+  z-index: 99999;
+  position: absolute;
+} */
+
+.react-image-magnify__large-image {
+  z-index: 9999;
+}
+
+/* style the banner text over the image */
+.textOverlay {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* TinyMCE editor style */
+.tox .tox-statusbar__branding svg {
+  display: none;
+}
+
+.warning {
+  border: 2px solid red !important;
+  border-radius: 10px;
+}
+
+.breadcrumbLink {
+  transition: 0.5s ease-in-out;
+}
+
+.breadcrumbLink:hover {
+  color: green;
+}
+
+.highlight {
+  color: green;
+  font-weight: 600;
+  font-size: 15px;
+}
