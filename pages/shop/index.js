@@ -165,76 +165,76 @@ const Shop = () => {
   }, []);
 
   // For fetching the categories from backend
-  const isDiscarded = useRef(false);
+  // const isDiscarded = useRef(false);
   useEffect(() => {
-    if (!isDiscarded.current) {
-      const fetchCategories = async () => {
-        try {
-          const { data } = await axios.get('/api/category/client/view');
-          setCategories(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchCategories();
-    }
-
-    return () => {
-      isDiscarded.current = true;
+    // if (!isDiscarded.current) {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get('/api/category/client/view');
+        setCategories(data);
+      } catch (error) {
+        console.log(error);
+      }
     };
+    fetchCategories();
+    // }
+
+    // return () => {
+    //   isDiscarded.current = true;
+    // };
   }, []);
 
   // For determining the maximum and minimum product price
-  const isOmitted = useRef(false);
+  // const isOmitted = useRef(false);
   useEffect(() => {
-    if (!isOmitted.current) {
-      try {
-        const fetchMaxMinPrice = async () => {
-          const { data } = await axios.get('/api/products/maxMinPrice');
-          // console.log(data);
-          const prices = [];
+    // if (!isOmitted.current) {
+    try {
+      const fetchMaxMinPrice = async () => {
+        const { data } = await axios.get('/api/products/maxMinPrice');
+        // console.log(data);
+        const prices = [];
 
-          // Calcualte price and convert decimal to integer
-          const minPrice = Math.floor(data[0].minPrice);
-          prices.push(minPrice);
+        // Calcualte price and convert decimal to integer
+        const minPrice = Math.floor(data[0].minPrice);
+        prices.push(minPrice);
 
-          const maxPrice = Math.ceil(data[0].maxPrice);
-          prices.push(maxPrice);
-          console.log('PRICE ==> ', prices);
-          setValue(prices);
-          setPriceValue(prices);
-        };
-        fetchMaxMinPrice();
-      } catch (error) {
-        console.log(error);
-        toast.error(error);
-      }
+        const maxPrice = Math.ceil(data[0].maxPrice);
+        prices.push(maxPrice);
+        console.log('PRICE ==> ', prices);
+        setValue(prices);
+        setPriceValue(prices);
+      };
+      fetchMaxMinPrice();
+    } catch (error) {
+      console.log(error);
+      toast.error(error);
     }
+    // }
 
-    return () => {
-      isOmitted.current = true;
-    };
+    // return () => {
+    //   isOmitted.current = true;
+    // };
   }, []);
 
   // For fetching the product from backend
-  const isExpelled = useRef(false);
+  // const isExpelled = useRef(false);
   useEffect(() => {
-    if (!isExpelled.current) {
-      try {
-        const fetchProducts = async () => {
-          const { data } = await axios.get('/api/products');
-          setProducts(data);
-        };
+    // if (!isExpelled.current) {
+    try {
+      const fetchProducts = async () => {
+        const { data } = await axios.get('/api/products');
+        setProducts(data);
+      };
 
-        fetchProducts();
-      } catch (error) {
-        toast.error(error);
-      }
+      fetchProducts();
+    } catch (error) {
+      toast.error(error);
     }
+    // }
 
-    return () => {
-      isExpelled.current = true;
-    };
+    // return () => {
+    //   isExpelled.current = true;
+    // };
   }, []);
 
   return (
