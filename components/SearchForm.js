@@ -138,8 +138,8 @@ const SearchForm = () => {
   };
 
   // fetch categories from database
+  let isCancelled = false;
   useEffect(() => {
-    let isCancelled = false;
     if (!isCancelled) {
       (async function () {
         try {

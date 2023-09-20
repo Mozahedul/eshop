@@ -1,9 +1,7 @@
 import db from './db';
 
 const getError = error =>
-  error.response && error.response.data && error.response.data.message
-    ? error.response.data.message
-    : error.message;
+  error?.response?.data?.message ? error.response.data.message : error.message;
 
 const onError = async (err, req, res, next) => {
   await db.disconnect();

@@ -10,7 +10,7 @@ handler.use(isAuth);
 
 /**
  * @param {request, response}
- * @returns
+ * @returns deleted message
  */
 handler.delete(async (req, res) => {
   // console.log(req.query.id);

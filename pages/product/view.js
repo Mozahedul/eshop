@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Mui from '../../components/muiImportComponents/ProductMUI';
 import * as MuiIcon from '../../components/muiImportComponents/MUIIcons';
@@ -70,9 +70,9 @@ const View = () => {
     setPage(0);
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userToken) {
         router.push('/login');
       } else {
@@ -96,7 +96,7 @@ const View = () => {
       }
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userToken, router, dispatch]);
   return (
