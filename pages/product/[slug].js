@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactHtmlParser from 'react-html-parser';
 import ReactImageMagnify from 'react-image-magnify';
@@ -160,31 +160,31 @@ const ProductScreen = props => {
   }, [product, userToken, dispatch, setValue]);
 
   // Get cart item from local storage
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      const storage = localStorage.getItem('cartItems');
-      const cartItemsStg = storage ? JSON.parse(storage) : [];
+    // if (!isCancelled.current) {
+    const storage = localStorage.getItem('cartItems');
+    const cartItemsStg = storage ? JSON.parse(storage) : [];
 
-      cartItemsStg?.map(item => {
-        if (item.slug === router.query.slug) {
-          setQty(item.quantity);
-        }
-        return true;
-      });
-      // For showing recently viewed products
-      dispatch({
-        type: 'RECENTLY_VIEWED',
-        payload: product,
-      });
+    cartItemsStg?.map(item => {
+      if (item.slug === router.query.slug) {
+        setQty(item.quantity);
+      }
+      return true;
+    });
+    // For showing recently viewed products
+    dispatch({
+      type: 'RECENTLY_VIEWED',
+      payload: product,
+    });
 
-      // When user click the product from bottom of this page
-      setShowImg(product.images[0]);
-      // setNextImage(true);
-    }
-    return () => {
-      isCancelled.current = true;
-    };
+    // When user click the product from bottom of this page
+    setShowImg(product.images[0]);
+    // setNextImage(true);
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [setQty, router, dispatch, product]);
 
   return (

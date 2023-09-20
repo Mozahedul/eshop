@@ -5,7 +5,6 @@ import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import * as Mui from '../muiImportComponents/HomeMUI';
 import deviceDimension from '../../utils/devicePixel';
-import { useRef } from 'react';
 
 // Dynamic import by Next.js
 const ProductCard = dynamic(() => import('../products/ProductCard'));
@@ -14,38 +13,38 @@ const NewArrival = ({ pixel, setPixel }) => {
   const [products, setProducts] = useState([]);
 
   // for fetching new arrival products
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
     setPixel(deviceDimension());
     const source = axios.CancelToken.source();
-    if (!isCancelled.current) {
-      const fetchProducts = async () => {
-        try {
-          // Fetching new products with axios
-          const response = await axios(
-            {
-              method: 'get',
-              url: '/api/home/new-arrivals',
-            },
-            { cancelToken: source.token }
-          );
-          if (response.statusText === 'OK') {
-            setProducts(response.data);
-          } else {
-            throw new Error('Something happened wrong on the server');
-          }
-        } catch (error) {
-          if (axios.isCancel(error)) {
-            console.log('Request not completed ==> ', error.message);
-          } else {
-            console.log('Error without axios ==> ', error.message);
-          }
+    // if (!isCancelled.current) {
+    const fetchProducts = async () => {
+      try {
+        // Fetching new products with axios
+        const response = await axios(
+          {
+            method: 'get',
+            url: '/api/home/new-arrivals',
+          },
+          { cancelToken: source.token }
+        );
+        if (response.statusText === 'OK') {
+          setProducts(response.data);
+        } else {
+          throw new Error('Something happened wrong on the server');
         }
-      };
-      fetchProducts();
-    }
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request not completed ==> ', error.message);
+        } else {
+          console.log('Error without axios ==> ', error.message);
+        }
+      }
+    };
+    fetchProducts();
+    // }
     return () => {
-      isCancelled.current = true;
+      // isCancelled.current = true;
       source.cancel('Operation cancelled by user');
     };
   }, [setProducts, setPixel]);

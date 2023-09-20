@@ -9,7 +9,6 @@ import * as Mui from '../../components/muiImportComponents/HomeMUI';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
 import ImageFallback from '../../utils/ImageFallback';
-import { useRef } from 'react';
 
 const Layout = dynamic(() => import('../../components/Layout'));
 
@@ -52,27 +51,27 @@ const View = () => {
     }
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      const fetchBanners = async () => {
-        dispatch({ type: 'BANNER_REQUEST' });
-        try {
-          const { data } = await axios.get('/api/home-slider/view', {
-            headers: { authorization: `Bearer ${userToken.token}` },
-          });
+    // if (!isCancelled.current) {
+    const fetchBanners = async () => {
+      dispatch({ type: 'BANNER_REQUEST' });
+      try {
+        const { data } = await axios.get('/api/home-slider/view', {
+          headers: { authorization: `Bearer ${userToken.token}` },
+        });
 
-          setBanners(data);
-          dispatch({ type: 'BANNER_SUCCESS' });
-        } catch (err) {
-          dispatch({ type: 'BANNER_FAIL', payload: getError(err) });
-        }
-      };
-      fetchBanners();
-    }
-    return () => {
-      isCancelled.current = true;
+        setBanners(data);
+        dispatch({ type: 'BANNER_SUCCESS' });
+      } catch (err) {
+        dispatch({ type: 'BANNER_FAIL', payload: getError(err) });
+      }
     };
+    fetchBanners();
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [userToken, dispatch]);
   return (
     <Layout>

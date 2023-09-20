@@ -26,7 +26,6 @@ import Image from 'next/legacy/image';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
 import SearchForm from '../components/SearchForm';
 import { StyledToolBar } from '../utils/styles';
-import { useRef } from 'react';
 
 const DesktopHeader = () => {
   const router = useRouter();
@@ -76,46 +75,46 @@ const DesktopHeader = () => {
     });
   };
 
-  const isDiscarded = useRef(false);
+  // const isDiscarded = useRef(false);
   useEffect(() => {
-    if (!isDiscarded.current) {
-      const cookieTheme = Cookies.get('darkMode');
-      dispatch({
-        type: cookieTheme === 'ON' ? 'DARK_MODE_ON' : 'DARK_MODE_OFF',
-      });
+    // if (!isDiscarded.current) {
+    const cookieTheme = Cookies.get('darkMode');
+    dispatch({
+      type: cookieTheme === 'ON' ? 'DARK_MODE_ON' : 'DARK_MODE_OFF',
+    });
 
-      const userInfoCookie = Cookies.get('userInfo');
-      const userLoginInfo = userInfoCookie ? JSON.parse(userInfoCookie) : '';
-      dispatch({
-        type: 'USER_LOGIN',
-        payload: userLoginInfo,
-      });
-    }
-    return () => {
-      isDiscarded.current = true;
-    };
+    const userInfoCookie = Cookies.get('userInfo');
+    const userLoginInfo = userInfoCookie ? JSON.parse(userInfoCookie) : '';
+    dispatch({
+      type: 'USER_LOGIN',
+      payload: userLoginInfo,
+    });
+    // }
+    // return () => {
+    //   isDiscarded.current = true;
+    // };
   }, [dispatch]);
 
   // get cart items from local storage and send to global state
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      const cartItemStg = localStorage.getItem('cartItems');
-      const cartParsedItem = cartItemStg ? JSON.parse(cartItemStg) : [];
+    // if (!isCancelled.current) {
+    const cartItemStg = localStorage.getItem('cartItems');
+    const cartParsedItem = cartItemStg ? JSON.parse(cartItemStg) : [];
 
-      cartParsedItem?.map(item => {
-        dispatch({
-          type: 'CART_ITEM_ADDED',
-          payload: item,
-        });
-        return true;
+    cartParsedItem?.map(item => {
+      dispatch({
+        type: 'CART_ITEM_ADDED',
+        payload: item,
       });
-    }
+      return true;
+    });
+    // }
 
-    return () => {
-      isCancelled.current = true;
-    };
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [dispatch]);
   return (
     <>

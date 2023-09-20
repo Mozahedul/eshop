@@ -12,7 +12,6 @@ import Layout from '../../../components/Layout';
 import styles from '../../../styles/account.module.css';
 import { useStateValue } from '../../../utils/contextAPI/StateProvider';
 import { getError } from '../../../utils/error';
-import { useRef } from 'react';
 
 const Edit = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -215,33 +214,33 @@ const Edit = () => {
     categoryOptions,
   ]);
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userToken) {
-        router.push('/login');
-      }
-
-      const fetchCategories = async () => {
-        const { data } = await axios.get('/api/category/view', {
-          headers: { authorization: `Bearer ${userToken.token}` },
-        });
-
-        const newArr = [];
-        data.map(info => {
-          newArr.push({
-            name: info.categories?.name,
-            _id: info.categories?._id,
-          });
-          return true;
-        });
-        setCategoryOptions(data);
-      };
-      fetchCategories();
+    // if (!isCancelled.current) {
+    if (!userToken) {
+      router.push('/login');
     }
-    return () => {
-      isCancelled.current = true;
+
+    const fetchCategories = async () => {
+      const { data } = await axios.get('/api/category/view', {
+        headers: { authorization: `Bearer ${userToken.token}` },
+      });
+
+      const newArr = [];
+      data.map(info => {
+        newArr.push({
+          name: info.categories?.name,
+          _id: info.categories?._id,
+        });
+        return true;
+      });
+      setCategoryOptions(data);
     };
+    fetchCategories();
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [router, setCategoryOptions, userToken]);
 
   return (

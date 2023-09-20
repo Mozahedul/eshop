@@ -138,25 +138,25 @@ const SearchForm = () => {
   };
 
   // fetch categories from database
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      (async function () {
-        try {
-          const { data } = await axios.get('/api/category/client/view');
-          if (data && data.length > 0) {
-            data.unshift({ name: 'All' });
-            setCategories(data);
-          }
-        } catch (error) {
-          // console.log(error);
+    // if (!isCancelled.current) {
+    (async function () {
+      try {
+        const { data } = await axios.get('/api/category/client/view');
+        if (data && data.length > 0) {
+          data.unshift({ name: 'All' });
+          setCategories(data);
         }
-        return true;
-      })();
-    }
-    return () => {
-      isCancelled.current = true;
-    };
+      } catch (error) {
+        // console.log(error);
+      }
+      return true;
+    })();
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [setCategories]);
 
   return (

@@ -11,7 +11,6 @@ import Layout from '../../../components/Layout';
 import styles from '../../../styles/account.module.css';
 import { useStateValue } from '../../../utils/contextAPI/StateProvider';
 import { getError } from '../../../utils/error';
-import { useRef } from 'react';
 
 const Edit = () => {
   const [image, setImage] = useState('');
@@ -68,36 +67,33 @@ const Edit = () => {
     }
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userToken) {
-        router.push('/login');
-      }
-      try {
-        const fetchBanner = async () => {
-          const { data } = await axios.get(
-            `/api/home-slider/edit/${routerId}`,
-            {
-              headers: { authorization: `Bearer ${userToken.token}` },
-            }
-          );
-
-          setValue('title', data.title);
-          setValue('subtitle', data.subtitle);
-          setImage(data.image);
-          // console.log('BANNER DATA ==> ', data);
-        };
-
-        fetchBanner();
-      } catch (error) {
-        console.log(error);
-      }
+    // if (!isCancelled.current) {
+    if (!userToken) {
+      router.push('/login');
     }
+    try {
+      const fetchBanner = async () => {
+        const { data } = await axios.get(`/api/home-slider/edit/${routerId}`, {
+          headers: { authorization: `Bearer ${userToken.token}` },
+        });
 
-    return () => {
-      isCancelled.current = true;
-    };
+        setValue('title', data.title);
+        setValue('subtitle', data.subtitle);
+        setImage(data.image);
+        // console.log('BANNER DATA ==> ', data);
+      };
+
+      fetchBanner();
+    } catch (error) {
+      console.log(error);
+    }
+    // }
+
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [routerId, userToken, router, setValue]);
   return (
     <Layout>

@@ -11,7 +11,6 @@ import Layout from '../../components/Layout';
 import styles from '../../styles/account.module.css';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
-import { useRef } from 'react';
 
 const Create = () => {
   const [productCats, setProductCats] = useState([]);
@@ -108,13 +107,13 @@ const Create = () => {
     }
   };
 
-  const isDiscarded = useRef(false);
+  // const isDiscarded = useRef(false);
   useEffect(() => {
-    if (!isDiscarded.current) {
-      if (!userToken) {
-        router.push('/login');
-      }
+    // if (!isDiscarded.current) {
+    if (!userToken) {
+      router.push('/login');
     }
+    // }
     // load categories from database
     const fetchCategories = async () => {
       const { data } = await axios.get('/api/category/view', {
@@ -124,9 +123,9 @@ const Create = () => {
     };
 
     fetchCategories();
-    return () => {
-      isDiscarded.current = true;
-    };
+    // return () => {
+    //   isDiscarded.current = true;
+    // };
   }, [userToken, router]);
 
   return (

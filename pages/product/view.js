@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import * as Mui from '../../components/muiImportComponents/ProductMUI';
 import * as MuiIcon from '../../components/muiImportComponents/MUIIcons';
@@ -70,34 +70,34 @@ const View = () => {
     setPage(0);
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userToken) {
-        router.push('/login');
-      } else {
-        const fetchProducts = async () => {
-          try {
-            dispatch({ type: 'PRODUCT_REQUEST' });
-            const { data } = await axios.get('/api/products/view', {
-              headers: { authorization: `Bearer ${userToken.token}` },
-            });
+    // if (!isCancelled.current) {
+    if (!userToken) {
+      router.push('/login');
+    } else {
+      const fetchProducts = async () => {
+        try {
+          dispatch({ type: 'PRODUCT_REQUEST' });
+          const { data } = await axios.get('/api/products/view', {
+            headers: { authorization: `Bearer ${userToken.token}` },
+          });
 
-            console.log('PRODUCTS INSIDE USE EFFECT ==> ', data);
-            setProducts(data);
-            dispatch({ type: 'PRODUCT_SUCCESS' });
-          } catch (err) {
-            dispatch({ type: 'PRODUCT_FAIL', error: getError(err) });
-            toast.error(err);
-          }
-        };
+          console.log('PRODUCTS INSIDE USE EFFECT ==> ', data);
+          setProducts(data);
+          dispatch({ type: 'PRODUCT_SUCCESS' });
+        } catch (err) {
+          dispatch({ type: 'PRODUCT_FAIL', error: getError(err) });
+          toast.error(err);
+        }
+      };
 
-        fetchProducts();
-      }
+      fetchProducts();
     }
-    return () => {
-      isCancelled.current = true;
-    };
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [userToken, router, dispatch]);
   return (
     <Layout

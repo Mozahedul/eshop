@@ -20,7 +20,6 @@ import { toast } from 'react-toastify';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Layout from '../../components/Layout';
 import ShopProducts from '../../components/shop/ShopProducts';
-import { useRef } from 'react';
 
 const Shop = () => {
   const router = useRouter();
@@ -132,24 +131,24 @@ const Shop = () => {
   }, [checkedBrands]);
 
   // Showing all brands
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      const fetchBrands = async () => {
-        try {
-          const { data } = await axios.get('/api/products/brands');
-          setProductBrands(data);
-        } catch (error) {
-          toast.error(error);
-        }
-      };
-
-      fetchBrands();
-    }
-
-    return () => {
-      isCancelled.current = true;
+    // if (!isCancelled.current) {
+    const fetchBrands = async () => {
+      try {
+        const { data } = await axios.get('/api/products/brands');
+        setProductBrands(data);
+      } catch (error) {
+        toast.error(error);
+      }
     };
+
+    fetchBrands();
+    // }
+
+    // return () => {
+    //   isCancelled.current = true;
+    // };
     // // Handle brands with checkbox
     // // Here, uniqObject will store an object inside multiple objects
     // const uniqObject = products.reduce((uniqProduct, currObj) => {

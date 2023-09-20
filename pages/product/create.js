@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as Mui from '../../components/muiImportComponents/ProductMUI';
@@ -168,30 +168,30 @@ const Create = () => {
 
   // To show categories from database as dropdown
   useEffect(() => {
-    const isCancelled = useRef(false);
-    if (!isCancelled.current) {
-      if (!userToken) {
-        router.push('/login');
-      }
-      const fetchCategories = async () => {
-        try {
-          const { data } = await axios.get('/api/category/view', {
-            headers: { authorization: `Bearer ${userToken.token}` },
-          });
-          setCatOptions(data);
-        } catch (err) {
-          toast.error(getError(err), {
-            position: 'top-center',
-            theme: 'colored',
-            autoClose: 2000,
-          });
-        }
-      };
-      fetchCategories();
+    // const isCancelled = useRef(false);
+    // if (!isCancelled.current) {
+    if (!userToken) {
+      router.push('/login');
     }
-    return () => {
-      isCancelled.current = true;
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get('/api/category/view', {
+          headers: { authorization: `Bearer ${userToken.token}` },
+        });
+        setCatOptions(data);
+      } catch (err) {
+        toast.error(getError(err), {
+          position: 'top-center',
+          theme: 'colored',
+          autoClose: 2000,
+        });
+      }
     };
+    fetchCategories();
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [userToken, setCatOptions, router]);
 
   return (

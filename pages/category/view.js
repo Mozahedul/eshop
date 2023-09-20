@@ -9,7 +9,6 @@ import * as Mui from '../../components/muiImportComponents/CategoryMUI';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
 import ImageFallback from '../../utils/ImageFallback';
-import { useRef } from 'react';
 
 const Layout = dynamic(() => import('../../components/Layout'));
 
@@ -68,31 +67,31 @@ const View = () => {
     setPage(0);
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userToken) {
-        router.push('/login');
-      } else {
-        const fetchCategories = async () => {
-          try {
-            dispatch({ type: 'CATEGORY_REQUEST' });
-            const { data } = await axios.get('/api/category/view', {
-              headers: { authorization: `Bearer ${userToken.token}` },
-            });
-            setCategories(data);
-            dispatch({ type: 'CATEGORY_SUCCESS' });
-          } catch (err) {
-            dispatch({ type: 'CATEGORY_FAIL', payload: getError(err) });
-            toast.error(err);
-          }
-        };
-        fetchCategories();
-      }
+    // if (!isCancelled.current) {
+    if (!userToken) {
+      router.push('/login');
+    } else {
+      const fetchCategories = async () => {
+        try {
+          dispatch({ type: 'CATEGORY_REQUEST' });
+          const { data } = await axios.get('/api/category/view', {
+            headers: { authorization: `Bearer ${userToken.token}` },
+          });
+          setCategories(data);
+          dispatch({ type: 'CATEGORY_SUCCESS' });
+        } catch (err) {
+          dispatch({ type: 'CATEGORY_FAIL', payload: getError(err) });
+          toast.error(err);
+        }
+      };
+      fetchCategories();
     }
-    return () => {
-      isCancelled.current = true;
-    };
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [dispatch, router, userToken]);
 
   return (

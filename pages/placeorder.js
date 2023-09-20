@@ -23,7 +23,6 @@ import CheckoutWizard from '../components/checkoutWizard';
 import Layout from '../components/Layout';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
 import { getError } from '../utils/error';
-import { useRef } from 'react';
 
 const PlaceOrder = () => {
   const [state, dispatch] = useStateValue();
@@ -108,35 +107,35 @@ const PlaceOrder = () => {
     }
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userInfo) {
-        router.push('/login');
-      }
-
-      // for fetching shipping address from cookie
-      const shipAddrCookie = Cookies.get('shippingAddress')
-        ? JSON.parse(Cookies.get('shippingAddress'))
-        : {};
-      setShipAddress(shipAddrCookie);
-
-      // for fetching payment method from cookie
-      const paymentMethCookie = Cookies.get('paymentMethod')
-        ? JSON.parse(Cookies.get('paymentMethod'))
-        : '';
-      setPaymentMeth(paymentMethCookie);
-
-      // for fetching cart items from local storage
-      const cartItemCookie = localStorage.getItem('cartItems')
-        ? JSON.parse(localStorage.getItem('cartItems'))
-        : [];
-
-      setShoppingCartItems(cartItemCookie);
+    // if (!isCancelled.current) {
+    if (!userInfo) {
+      router.push('/login');
     }
-    return () => {
-      isCancelled.current = true;
-    };
+
+    // for fetching shipping address from cookie
+    const shipAddrCookie = Cookies.get('shippingAddress')
+      ? JSON.parse(Cookies.get('shippingAddress'))
+      : {};
+    setShipAddress(shipAddrCookie);
+
+    // for fetching payment method from cookie
+    const paymentMethCookie = Cookies.get('paymentMethod')
+      ? JSON.parse(Cookies.get('paymentMethod'))
+      : '';
+    setPaymentMeth(paymentMethCookie);
+
+    // for fetching cart items from local storage
+    const cartItemCookie = localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : [];
+
+    setShoppingCartItems(cartItemCookie);
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [userInfo, paymentMeth, router]);
 
   useEffect(() => {
@@ -146,9 +145,9 @@ const PlaceOrder = () => {
       // payment method is absent, then we will redirect
       // to home page
       if (
-        shipAddress === {} &&
+        Object.keys(shipAddress).length < 1 &&
         paymentMeth === '' &&
-        shoppingCartItems.length === 0
+        shoppingCartItems.length < 1
       ) {
         router.push('/');
       }
@@ -167,7 +166,9 @@ const PlaceOrder = () => {
       <Typography variant="h1" sx={{ marginTop: '40px' }}>
         Place order
       </Typography>
-      {shipAddress !== {} && paymentMeth !== '' && shoppingCartItems !== [] ? (
+      {Object.keys(shipAddress).length &&
+      paymentMeth !== '' &&
+      shoppingCartItems?.length ? (
         <Grid container spacing={2}>
           <Grid item md={9} xs={12}>
             <Card sx={{ marginBottom: '15px' }}>

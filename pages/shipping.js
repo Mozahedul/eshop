@@ -13,7 +13,6 @@ import CheckoutWizard from '../components/checkoutWizard';
 import Layout from '../components/Layout';
 import styles from '../styles/account.module.css';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
-import { useRef } from 'react';
 
 const Shipping = () => {
   const router = useRouter();
@@ -57,29 +56,29 @@ const Shipping = () => {
     router.push('/payment');
   };
 
-  const isCancelled = useRef(false);
+  // const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled.current) {
-      if (!userInfo) {
-        router.push('/login?redirect=shipping');
-      } else {
-        // console.log(shippingAddress);
-        const shippingAddressFromCookie = Cookies.get('shippingAddress')
-          ? JSON.parse(Cookies.get('shippingAddress'))
-          : '';
-        const { fullName, address, city, postalCode, country } =
-          shippingAddressFromCookie;
+    // if (!isCancelled.current) {
+    if (!userInfo) {
+      router.push('/login?redirect=shipping');
+    } else {
+      // console.log(shippingAddress);
+      const shippingAddressFromCookie = Cookies.get('shippingAddress')
+        ? JSON.parse(Cookies.get('shippingAddress'))
+        : '';
+      const { fullName, address, city, postalCode, country } =
+        shippingAddressFromCookie;
 
-        setValue('fullName', fullName);
-        setValue('address', address);
-        setValue('city', city);
-        setValue('postalCode', postalCode);
-        setValue('country', country);
-      }
+      setValue('fullName', fullName);
+      setValue('address', address);
+      setValue('city', city);
+      setValue('postalCode', postalCode);
+      setValue('country', country);
     }
-    return () => {
-      isCancelled.current = true;
-    };
+    // }
+    // return () => {
+    //   isCancelled.current = true;
+    // };
   }, [router, userInfo, setValue]);
 
   return (
