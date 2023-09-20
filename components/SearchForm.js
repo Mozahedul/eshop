@@ -138,9 +138,9 @@ const SearchForm = () => {
   };
 
   // fetch categories from database
-  let isCancelled = false;
+  const isCancelled = useRef(false);
   useEffect(() => {
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       (async function () {
         try {
           const { data } = await axios.get('/api/category/client/view');
@@ -155,7 +155,7 @@ const SearchForm = () => {
       })();
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [setCategories]);
 

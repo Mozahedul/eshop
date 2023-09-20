@@ -5,6 +5,7 @@ import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import * as Mui from '../muiImportComponents/HomeMUI';
 import deviceDimension from '../../utils/devicePixel';
+import { useRef } from 'react';
 
 // Dynamic import by Next.js
 const ProductCard = dynamic(() => import('../products/ProductCard'));
@@ -13,11 +14,11 @@ const NewArrival = ({ pixel, setPixel }) => {
   const [products, setProducts] = useState([]);
 
   // for fetching new arrival products
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
     setPixel(deviceDimension());
     const source = axios.CancelToken.source();
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       const fetchProducts = async () => {
         try {
           // Fetching new products with axios
@@ -44,7 +45,7 @@ const NewArrival = ({ pixel, setPixel }) => {
       fetchProducts();
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
       source.cancel('Operation cancelled by user');
     };
   }, [setProducts, setPixel]);

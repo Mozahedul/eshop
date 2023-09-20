@@ -11,6 +11,7 @@ import Layout from '../../../components/Layout';
 import styles from '../../../styles/account.module.css';
 import { useStateValue } from '../../../utils/contextAPI/StateProvider';
 import { getError } from '../../../utils/error';
+import { useRef } from 'react';
 
 const Edit = () => {
   const [image, setImage] = useState('');
@@ -67,10 +68,9 @@ const Edit = () => {
     }
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userToken) {
         router.push('/login');
       }
@@ -96,7 +96,7 @@ const Edit = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [routerId, userToken, router, setValue]);
   return (

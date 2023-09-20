@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as Mui from '../../components/muiImportComponents/ProductMUI';
@@ -168,8 +168,8 @@ const Create = () => {
 
   // To show categories from database as dropdown
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    const isCancelled = useRef(false);
+    if (!isCancelled.current) {
       if (!userToken) {
         router.push('/login');
       }
@@ -190,7 +190,7 @@ const Create = () => {
       fetchCategories();
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userToken, setCatOptions, router]);
 

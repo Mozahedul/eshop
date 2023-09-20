@@ -11,6 +11,7 @@ import Layout from '../../components/Layout';
 import styles from '../../styles/account.module.css';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
+import { useRef } from 'react';
 
 const Create = () => {
   const [productCats, setProductCats] = useState([]);
@@ -107,9 +108,9 @@ const Create = () => {
     }
   };
 
+  const isDiscarded = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isDiscarded.current) {
       if (!userToken) {
         router.push('/login');
       }
@@ -124,7 +125,7 @@ const Create = () => {
 
     fetchCategories();
     return () => {
-      isCancelled = true;
+      isDiscarded.current = true;
     };
   }, [userToken, router]);
 

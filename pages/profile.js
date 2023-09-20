@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import Layout from '../components/Layout';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
 import { getError } from '../utils/error';
+import { useRef } from 'react';
 
 const Profile = () => {
   const [{ userInfo }, dispatch] = useStateValue();
@@ -100,9 +101,9 @@ const Profile = () => {
     };
   }, [watch]);
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userInfo) {
         router.push('/login');
         return true;
@@ -112,7 +113,7 @@ const Profile = () => {
       setValue('email', userInfo.email);
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userInfo, router, setValue]);
 

@@ -23,6 +23,7 @@ import CheckoutWizard from '../components/checkoutWizard';
 import Layout from '../components/Layout';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
 import { getError } from '../utils/error';
+import { useRef } from 'react';
 
 const PlaceOrder = () => {
   const [state, dispatch] = useStateValue();
@@ -107,10 +108,9 @@ const PlaceOrder = () => {
     }
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userInfo) {
         router.push('/login');
       }
@@ -135,7 +135,7 @@ const PlaceOrder = () => {
       setShoppingCartItems(cartItemCookie);
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userInfo, paymentMeth, router]);
 

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../../components/products/ProductCard';
 import Layout from '../../components/Layout';
+import { useRef } from 'react';
 
 const Category = () => {
   const router = useRouter();
@@ -19,9 +20,9 @@ const Category = () => {
     ? JSON.parse(bytes?.toString(CryptoJS.enc.Utf8))
     : '';
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       try {
         const fetchProducts = async () => {
           const { data } = await axios.get(
@@ -37,7 +38,7 @@ const Category = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [setProducts, decryptedData]);
 

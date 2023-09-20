@@ -26,6 +26,7 @@ import Image from 'next/legacy/image';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
 import SearchForm from '../components/SearchForm';
 import { StyledToolBar } from '../utils/styles';
+import { useRef } from 'react';
 
 const DesktopHeader = () => {
   const router = useRouter();
@@ -75,9 +76,9 @@ const DesktopHeader = () => {
     });
   };
 
+  const isDiscarded = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isDiscarded.current) {
       const cookieTheme = Cookies.get('darkMode');
       dispatch({
         type: cookieTheme === 'ON' ? 'DARK_MODE_ON' : 'DARK_MODE_OFF',
@@ -91,15 +92,15 @@ const DesktopHeader = () => {
       });
     }
     return () => {
-      isCancelled = true;
+      isDiscarded.current = true;
     };
   }, [dispatch]);
 
   // get cart items from local storage and send to global state
   // eslint-disable-next-line react-hooks/rules-of-hooks
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       const cartItemStg = localStorage.getItem('cartItems');
       const cartParsedItem = cartItemStg ? JSON.parse(cartItemStg) : [];
 
@@ -113,7 +114,7 @@ const DesktopHeader = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [dispatch]);
   return (

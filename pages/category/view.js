@@ -9,6 +9,7 @@ import * as Mui from '../../components/muiImportComponents/CategoryMUI';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
 import ImageFallback from '../../utils/ImageFallback';
+import { useRef } from 'react';
 
 const Layout = dynamic(() => import('../../components/Layout'));
 
@@ -67,9 +68,9 @@ const View = () => {
     setPage(0);
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userToken) {
         router.push('/login');
       } else {
@@ -90,7 +91,7 @@ const View = () => {
       }
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [dispatch, router, userToken]);
 

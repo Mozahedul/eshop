@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import Image from 'next/legacy/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ReactHtmlParser from 'react-html-parser';
 import ReactImageMagnify from 'react-image-magnify';
@@ -160,10 +160,9 @@ const ProductScreen = props => {
   }, [product, userToken, dispatch, setValue]);
 
   // Get cart item from local storage
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       const storage = localStorage.getItem('cartItems');
       const cartItemsStg = storage ? JSON.parse(storage) : [];
 
@@ -184,7 +183,7 @@ const ProductScreen = props => {
       // setNextImage(true);
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [setQty, router, dispatch, product]);
 

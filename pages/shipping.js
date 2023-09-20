@@ -13,6 +13,7 @@ import CheckoutWizard from '../components/checkoutWizard';
 import Layout from '../components/Layout';
 import styles from '../styles/account.module.css';
 import { useStateValue } from '../utils/contextAPI/StateProvider';
+import { useRef } from 'react';
 
 const Shipping = () => {
   const router = useRouter();
@@ -56,9 +57,9 @@ const Shipping = () => {
     router.push('/payment');
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userInfo) {
         router.push('/login?redirect=shipping');
       } else {
@@ -77,7 +78,7 @@ const Shipping = () => {
       }
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [router, userInfo, setValue]);
 

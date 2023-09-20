@@ -11,6 +11,7 @@ import * as Mui from '../../components/muiImportComponents/CategoryMUI';
 import styles from '../../styles/account.module.css';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
+import { useRef } from 'react';
 
 const Layout = dynamic(() => import('../../components/Layout'));
 
@@ -101,15 +102,15 @@ const Create = () => {
     }
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       if (!userToken) {
         router.push('/login');
       }
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userToken, router]);
 

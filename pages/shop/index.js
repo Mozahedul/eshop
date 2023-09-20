@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Layout from '../../components/Layout';
 import ShopProducts from '../../components/shop/ShopProducts';
+import { useRef } from 'react';
 
 const Shop = () => {
   const router = useRouter();
@@ -131,9 +132,9 @@ const Shop = () => {
   }, [checkedBrands]);
 
   // Showing all brands
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       const fetchBrands = async () => {
         try {
           const { data } = await axios.get('/api/products/brands');
@@ -147,7 +148,7 @@ const Shop = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
     // // Handle brands with checkbox
     // // Here, uniqObject will store an object inside multiple objects
@@ -165,9 +166,9 @@ const Shop = () => {
   }, []);
 
   // For fetching the categories from backend
+  const isDiscarded = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isDiscarded.current) {
       const fetchCategories = async () => {
         try {
           const { data } = await axios.get('/api/category/client/view');
@@ -180,14 +181,14 @@ const Shop = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isDiscarded.current = true;
     };
   }, []);
 
   // For determining the maximum and minimum product price
+  const isOmitted = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isOmitted.current) {
       try {
         const fetchMaxMinPrice = async () => {
           const { data } = await axios.get('/api/products/maxMinPrice');
@@ -212,14 +213,14 @@ const Shop = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isOmitted.current = true;
     };
   }, []);
 
   // For fetching the product from backend
+  const isExpelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isExpelled.current) {
       try {
         const fetchProducts = async () => {
           const { data } = await axios.get('/api/products');
@@ -233,7 +234,7 @@ const Shop = () => {
     }
 
     return () => {
-      isCancelled = true;
+      isExpelled.current = true;
     };
   }, []);
 

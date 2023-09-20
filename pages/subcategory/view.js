@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-toastify';
 import * as Mui from '../../components/muiImportComponents/SubCategoryMUI';
 import Layout from '../../components/Layout';
@@ -74,9 +74,9 @@ const View = () => {
     setPage(0);
   };
 
+  const isDiscarded = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isDiscarded.current) {
       if (!userToken) {
         router.push('/login');
       } else {
@@ -99,7 +99,7 @@ const View = () => {
       }
     }
     return () => {
-      isCancelled = true;
+      isDiscarded.current = true;
     };
   }, [dispatch, router, userToken]);
   return (

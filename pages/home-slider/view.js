@@ -9,6 +9,7 @@ import * as Mui from '../../components/muiImportComponents/HomeMUI';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import { getError } from '../../utils/error';
 import ImageFallback from '../../utils/ImageFallback';
+import { useRef } from 'react';
 
 const Layout = dynamic(() => import('../../components/Layout'));
 
@@ -51,9 +52,9 @@ const View = () => {
     }
   };
 
+  const isCancelled = useRef(false);
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) {
+    if (!isCancelled.current) {
       const fetchBanners = async () => {
         dispatch({ type: 'BANNER_REQUEST' });
         try {
@@ -70,7 +71,7 @@ const View = () => {
       fetchBanners();
     }
     return () => {
-      isCancelled = true;
+      isCancelled.current = true;
     };
   }, [userToken, dispatch]);
   return (
