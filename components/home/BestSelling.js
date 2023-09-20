@@ -16,39 +16,39 @@ const BestSelling = ({ pixel, setPixel }) => {
 
   // fetch best selling products
   useEffect(() => {
-    let isDiscarded = false;
+    // let isDiscarded = false;
     setPixel(deviceDimension());
     const source = axios.CancelToken.source();
-    if (!isDiscarded) {
-      const fetchBestSellingProducts = async () => {
-        try {
-          const response = await axios(
-            {
-              method: 'get',
-              url: '/api/products/best-seller',
-            },
-            { cancelToken: source.token }
-          );
+    // if (!isDiscarded) {
+    const fetchBestSellingProducts = async () => {
+      try {
+        const response = await axios(
+          {
+            method: 'get',
+            url: '/api/products/best-seller',
+          },
+          { cancelToken: source.token }
+        );
 
-          if (response.statusText === 'OK') {
-            setBestSellingProducts(response.data);
-          } else {
-            throw new Error('Something went wrong on the server');
-          }
-        } catch (error) {
-          if (axios.isCancel(error)) {
-            // console.log('Request cancelled ==> ', error.message);
-          } else {
-            // console.log('Error without axios ==> ', error.message);
-          }
+        if (response.statusText === 'OK') {
+          setBestSellingProducts(response.data);
+        } else {
+          throw new Error('Something went wrong on the server');
         }
-      };
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          // console.log('Request cancelled ==> ', error.message);
+        } else {
+          // console.log('Error without axios ==> ', error.message);
+        }
+      }
+    };
 
-      fetchBestSellingProducts();
-    }
+    fetchBestSellingProducts();
+    // }
     return () => {
       source.cancel('Operation cancelled by user');
-      isDiscarded = true;
+      // isDiscarded = true;
     };
   }, [setPixel]);
   return bestSellingProducts &&

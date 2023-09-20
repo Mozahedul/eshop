@@ -74,33 +74,33 @@ const View = () => {
     setPage(0);
   };
 
-  const isDiscarded = useRef(false);
+  // const isDiscarded = useRef(false);
   useEffect(() => {
-    if (!isDiscarded.current) {
-      if (!userToken) {
-        router.push('/login');
-      } else {
-        const fetchSubCategories = async () => {
-          try {
-            dispatch({ type: 'SUBCATEGORY_REQUEST' });
-            const { data } = await axios.get('/api/subcategory/view', {
-              headers: { authorization: `Bearer ${userToken.token}` },
-            });
-            // if (data !== null) {
-            dispatch({ type: 'SUBCATEGORY_SUCCESS' });
-            setSubCategories(data);
-            // }
-          } catch (err) {
-            dispatch({ type: 'SUBCATEGORY_FAIL', payload: getError(err) });
-            toast.error(err);
-          }
-        };
-        fetchSubCategories();
-      }
+    // if (!isDiscarded.current) {
+    if (!userToken) {
+      router.push('/login');
+    } else {
+      const fetchSubCategories = async () => {
+        try {
+          dispatch({ type: 'SUBCATEGORY_REQUEST' });
+          const { data } = await axios.get('/api/subcategory/view', {
+            headers: { authorization: `Bearer ${userToken.token}` },
+          });
+          // if (data !== null) {
+          dispatch({ type: 'SUBCATEGORY_SUCCESS' });
+          setSubCategories(data);
+          // }
+        } catch (err) {
+          dispatch({ type: 'SUBCATEGORY_FAIL', payload: getError(err) });
+          toast.error(err);
+        }
+      };
+      fetchSubCategories();
     }
-    return () => {
-      isDiscarded.current = true;
-    };
+    // }
+    // return () => {
+    //   isDiscarded.current = true;
+    // };
   }, [dispatch, router, userToken]);
   return (
     <Layout

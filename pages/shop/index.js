@@ -109,25 +109,25 @@ const Shop = () => {
 
   // Fetching products according to brands
   useEffect(() => {
-    let isDiscarded = false;
-    if (!isDiscarded) {
-      try {
-        const fetchBrands = async () => {
-          // console.log('CHECKED BRANDS', checkedBrands);
-          const { data } = await axios.get(
-            `/api/products/brand?brand=${checkedBrands}`
-          );
-          setProducts(data);
-        };
-        fetchBrands();
-      } catch (error) {
-        toast.error(error);
-      }
+    // let isDiscarded = false;
+    // if (!isDiscarded) {
+    try {
+      const fetchBrands = async () => {
+        // console.log('CHECKED BRANDS', checkedBrands);
+        const { data } = await axios.get(
+          `/api/products/brand?brand=${checkedBrands}`
+        );
+        setProducts(data);
+      };
+      fetchBrands();
+    } catch (error) {
+      toast.error(error);
     }
+    // }
 
-    return () => {
-      isDiscarded = true;
-    };
+    // return () => {
+    //   isDiscarded = true;
+    // };
   }, [checkedBrands]);
 
   // Showing all brands

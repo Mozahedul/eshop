@@ -11,39 +11,39 @@ const HomeSlider = () => {
   const [bannerData, setBannerData] = useState([]);
   const router = useRouter();
   useEffect(() => {
-    let isDiscarded = false;
+    // let isDiscarded = false;
     const source = axios.CancelToken.source();
     // for browser responsiveness
     // setPixel(deviceDimension());
-    if (!isDiscarded) {
-      const fetchBanners = async () => {
-        try {
-          // const {data: banners} = await axios.get("url");
-          const response = await axios(
-            {
-              method: 'get',
-              url: '/api/home-slider/banner/view',
-            },
-            { cancelToken: source.token }
-          );
+    // if (!isDiscarded) {
+    const fetchBanners = async () => {
+      try {
+        // const {data: banners} = await axios.get("url");
+        const response = await axios(
+          {
+            method: 'get',
+            url: '/api/home-slider/banner/view',
+          },
+          { cancelToken: source.token }
+        );
 
-          if (response.statusText === 'OK') {
-            setBannerData(response.data);
-          } else {
-            throw new Error('Something went wrong on the server');
-          }
-        } catch (error) {
-          if (axios.isCancel(error)) {
-            console.log('Request cancelled ==> ', error.message);
-          } else {
-            console.log('Error without axios ==> ', error.message);
-          }
+        if (response.statusText === 'OK') {
+          setBannerData(response.data);
+        } else {
+          throw new Error('Something went wrong on the server');
         }
-      };
-      fetchBanners();
-    }
+      } catch (error) {
+        if (axios.isCancel(error)) {
+          console.log('Request cancelled ==> ', error.message);
+        } else {
+          console.log('Error without axios ==> ', error.message);
+        }
+      }
+    };
+    fetchBanners();
+    // }
     return () => {
-      isDiscarded = true;
+      // isDiscarded = true;
       source.cancel();
     };
   }, []);

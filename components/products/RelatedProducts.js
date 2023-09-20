@@ -61,18 +61,18 @@ const RelatedProducts = ({ product }) => {
   };
 
   useEffect(() => {
-    let isDiscarded = false;
-    if (!isDiscarded) {
-      const fetchProducts = async () => {
-        const { data } = await axios.get(`/api/product-details/${categoryId}`);
-        const filteredProducts = data?.filter(item => item._id !== product._id);
-        setProducts(filteredProducts);
-      };
-      fetchProducts();
-    }
-    return () => {
-      isDiscarded = true;
+    // let isDiscarded = false;
+    // if (!isDiscarded) {
+    const fetchProducts = async () => {
+      const { data } = await axios.get(`/api/product-details/${categoryId}`);
+      const filteredProducts = data?.filter(item => item._id !== product._id);
+      setProducts(filteredProducts);
     };
+    fetchProducts();
+    // }
+    // return () => {
+    //   isDiscarded = true;
+    // };
   }, [categoryId, setProducts, product]);
   return products.length > 0 ? (
     <>
