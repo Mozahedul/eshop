@@ -200,10 +200,10 @@ const Shop = () => {
         const prices = [];
 
         // Calcualte price and convert decimal to integer
-        const minPrice = data.length && Math.floor(data[0].minPrice);
+        const minPrice = data.length > 0 ? Math.floor(data[0].minPrice) : 0;
         prices.push(minPrice);
 
-        const maxPrice = data.length && Math.ceil(data[0].maxPrice);
+        const maxPrice = data.length > 0 ? Math.ceil(data[0].maxPrice) : 0;
         prices.push(maxPrice);
         console.log('PRICE ==> ', prices);
         setValue(prices);
