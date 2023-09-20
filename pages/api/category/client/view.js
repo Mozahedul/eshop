@@ -28,6 +28,9 @@ handler.get(async (req, res) => {
       },
       { $sort: { productCount: -1 } },
     ]);
+
+    console.log('CATEGORIES BACKEND ==> ', categories);
+
     res.send(categories);
     await db.disconnect();
   } catch (error) {

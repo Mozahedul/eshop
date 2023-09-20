@@ -33,7 +33,12 @@ const Shop = () => {
   const [productBrands, setProductBrands] = useState([]);
 
   // Category visibility
-  const categoriesToShow = categories.length && categories.slice(0, visibleCat);
+  const categoriesToShow =
+    Array.isArray(categories) && categories.length >= 4
+      ? categories.slice(0, visibleCat)
+      : categories;
+
+  console.log('CATEGORIES TO SHOW ==> ', categoriesToShow);
 
   const handleCatVisibility = () => {
     setVisibleCat(visibleCat + 4);
@@ -248,116 +253,132 @@ const Shop = () => {
         {/* Sidebar of shop page */}
         <Grid item xs={12} md={3}>
           {/* Categories sidebar */}
-          <Typography variant="h6" component="h6" marginBottom="10px">
-            By Categories
-          </Typography>
-          <Paper>
-            <MenuList dense>
-              {categoriesToShow.length &&
-                categoriesToShow.map((category, index) => (
-                  <ListItemButton
-                    selected={selectedIndex === index}
-                    onClick={() => handleProductsWithCat(category._id, index)}
-                    key={uuidv4()}
-                    sx={{ fontWeight: '500', color: 'gray', fontSize: '14px' }}
-                  >
-                    {category.name} ({category.productCount})
-                  </ListItemButton>
-                ))}
-              <Box display="flex">
-                <Button
-                  disabled={visibleCat >= categories.length}
-                  onClick={handleCatVisibility}
-                  variant="outlined"
-                  color="primary"
-                  size="small"
-                  fontSize="small"
-                  sx={{
-                    marginLeft: '10px',
-                    marginTop: '10px',
-                    display: 'block',
-                  }}
-                >
-                  More
-                </Button>
-                <Button
-                  onClick={handleCatLessVisibility}
-                  disabled={visibleCat <= 4}
-                  variant="outlined"
-                  color="warning"
-                  size="small"
-                  fontSize="small"
-                  sx={{
-                    marginLeft: '10px',
-                    marginTop: '10px',
-                    display: 'block',
-                  }}
-                >
-                  Less
-                </Button>
-              </Box>
-            </MenuList>
-          </Paper>
+          {categoriesToShow.length > 0 && (
+            <>
+              <Typography variant="h6" component="h6" marginBottom="10px">
+                By Categories
+              </Typography>
+              <Paper>
+                <MenuList dense>
+                  {categoriesToShow.map((category, index) => (
+                    <ListItemButton
+                      selected={selectedIndex === index}
+                      onClick={() => handleProductsWithCat(category._id, index)}
+                      key={uuidv4()}
+                      sx={{
+                        fontWeight: '500',
+                        color: 'gray',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {category.name} ({category.productCount})
+                    </ListItemButton>
+                  ))}
+                  <Box display="flex">
+                    <Button
+                      disabled={visibleCat >= categories.length}
+                      onClick={handleCatVisibility}
+                      variant="outlined"
+                      color="primary"
+                      size="small"
+                      fontSize="small"
+                      sx={{
+                        marginLeft: '10px',
+                        marginTop: '10px',
+                        display: 'block',
+                      }}
+                    >
+                      More
+                    </Button>
+                    <Button
+                      onClick={handleCatLessVisibility}
+                      disabled={visibleCat <= 4}
+                      variant="outlined"
+                      color="warning"
+                      size="small"
+                      fontSize="small"
+                      sx={{
+                        marginLeft: '10px',
+                        marginTop: '10px',
+                        display: 'block',
+                      }}
+                    >
+                      Less
+                    </Button>
+                  </Box>
+                </MenuList>
+              </Paper>
+            </>
+          )}
 
           {/* Price Sidebar */}
-          <Typography
-            variant="h6"
-            component="h6"
-            marginBottom="10px"
-            marginTop="30px"
-          >
-            By Price
-          </Typography>
-          <Box paddingRight="30px" paddingLeft="10px">
-            <Slider
-              value={value}
-              min={minPriceValue}
-              max={maxPriceValue}
-              step={10}
-              onChange={handleSlider}
-              valueLabelDisplay="auto"
-            />
+          {minPriceValue > 0 && (
+            <>
+              <Typography
+                variant="h6"
+                component="h6"
+                marginBottom="10px"
+                marginTop="30px"
+              >
+                By Price
+              </Typography>
 
-            <Typography>
-              Price: ${value[0]} - ${value[1]}
-            </Typography>
-          </Box>
+              <Box paddingRight="30px" paddingLeft="10px">
+                <Slider
+                  value={value}
+                  min={minPriceValue}
+                  max={maxPriceValue}
+                  step={10}
+                  onChange={handleSlider}
+                  valueLabelDisplay="auto"
+                />
+
+                <Typography>
+                  Price: ${value[0]} - ${value[1]}
+                </Typography>
+              </Box>
+            </>
+          )}
 
           {/* Brand sidebar */}
-          <Typography
-            variant="h6"
-            component="h6"
-            marginBottom="10px"
-            marginTop="30px"
-          >
-            By Brand
-          </Typography>
-          <Paper sx={{ padding: '10px' }}>
-            <FormGroup
-              sx={{
-                height: '200px',
-                display: 'flex',
-                flexDirection: 'column',
-                flexWrap: 'nowrap',
-                overflowY: 'auto',
-              }}
-            >
-              {productBrands.length &&
-                productBrands?.map(product => (
-                  <FormControlLabel
-                    key={uuidv4()}
-                    label={`${product.brand} (${product.count})`}
-                    control={
-                      <Checkbox
-                        size="small"
-                        checked={checkedBrands.includes(product.brand)}
-                        onChange={() => handleCheckbox(product.brand)}
-                      />
-                    }
-                  />
-                ))}
-            </FormGroup>
-          </Paper>
+          {productBrands.length > 0 && (
+            <>
+              <Typography
+                variant="h6"
+                component="h6"
+                marginBottom="10px"
+                marginTop="30px"
+              >
+                By Brand
+              </Typography>
+
+              <Paper sx={{ padding: '10px' }}>
+                <FormGroup
+                  sx={{
+                    height: '200px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flexWrap: 'nowrap',
+                    overflowY: 'auto',
+                  }}
+                >
+                  {productBrands?.map(product => (
+                    <FormControlLabel
+                      key={uuidv4()}
+                      label={`${product.brand} (${product.count})`}
+                      control={
+                        <Checkbox
+                          size="small"
+                          checked={checkedBrands.includes(product.brand)}
+                          onChange={() => handleCheckbox(product.brand)}
+                        />
+                      }
+                    />
+                  ))}
+                </FormGroup>
+              </Paper>
+            </>
+          )}
         </Grid>
         {/* Products container */}
         <Grid item xs={12} md={9}>
