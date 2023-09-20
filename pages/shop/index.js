@@ -33,7 +33,7 @@ const Shop = () => {
   const [productBrands, setProductBrands] = useState([]);
 
   // Category visibility
-  const categoriesToShow = categories.slice(0, visibleCat);
+  const categoriesToShow = categories.length && categories.slice(0, visibleCat);
 
   const handleCatVisibility = () => {
     setVisibleCat(visibleCat + 4);
@@ -195,10 +195,10 @@ const Shop = () => {
         const prices = [];
 
         // Calcualte price and convert decimal to integer
-        const minPrice = Math.floor(data[0].minPrice);
+        const minPrice = data.length && Math.floor(data[0].minPrice);
         prices.push(minPrice);
 
-        const maxPrice = Math.ceil(data[0].maxPrice);
+        const maxPrice = data.length && Math.ceil(data[0].maxPrice);
         prices.push(maxPrice);
         console.log('PRICE ==> ', prices);
         setValue(prices);
@@ -245,22 +245,25 @@ const Shop = () => {
       <Breadcrumbs breadcrumbs={router.asPath.split('/')} />
       <Typography variant="h1">Shop</Typography>
       <Grid container spacing={3}>
+        {/* Sidebar of shop page */}
         <Grid item xs={12} md={3}>
+          {/* Categories sidebar */}
           <Typography variant="h6" component="h6" marginBottom="10px">
             By Categories
           </Typography>
           <Paper>
             <MenuList dense>
-              {categoriesToShow.map((category, index) => (
-                <ListItemButton
-                  selected={selectedIndex === index}
-                  onClick={() => handleProductsWithCat(category._id, index)}
-                  key={uuidv4()}
-                  sx={{ fontWeight: '500', color: 'gray', fontSize: '14px' }}
-                >
-                  {category.name} ({category.productCount})
-                </ListItemButton>
-              ))}
+              {categoriesToShow.length &&
+                categoriesToShow.map((category, index) => (
+                  <ListItemButton
+                    selected={selectedIndex === index}
+                    onClick={() => handleProductsWithCat(category._id, index)}
+                    key={uuidv4()}
+                    sx={{ fontWeight: '500', color: 'gray', fontSize: '14px' }}
+                  >
+                    {category.name} ({category.productCount})
+                  </ListItemButton>
+                ))}
               <Box display="flex">
                 <Button
                   disabled={visibleCat >= categories.length}
@@ -296,6 +299,7 @@ const Shop = () => {
             </MenuList>
           </Paper>
 
+          {/* Price Sidebar */}
           <Typography
             variant="h6"
             component="h6"
@@ -319,6 +323,7 @@ const Shop = () => {
             </Typography>
           </Box>
 
+          {/* Brand sidebar */}
           <Typography
             variant="h6"
             component="h6"
@@ -337,22 +342,24 @@ const Shop = () => {
                 overflowY: 'auto',
               }}
             >
-              {productBrands?.map(product => (
-                <FormControlLabel
-                  key={uuidv4()}
-                  label={`${product.brand} (${product.count})`}
-                  control={
-                    <Checkbox
-                      size="small"
-                      checked={checkedBrands.includes(product.brand)}
-                      onChange={() => handleCheckbox(product.brand)}
-                    />
-                  }
-                />
-              ))}
+              {productBrands.length &&
+                productBrands?.map(product => (
+                  <FormControlLabel
+                    key={uuidv4()}
+                    label={`${product.brand} (${product.count})`}
+                    control={
+                      <Checkbox
+                        size="small"
+                        checked={checkedBrands.includes(product.brand)}
+                        onChange={() => handleCheckbox(product.brand)}
+                      />
+                    }
+                  />
+                ))}
             </FormGroup>
           </Paper>
         </Grid>
+        {/* Products container */}
         <Grid item xs={12} md={9}>
           <ShopProducts products={products} />
         </Grid>
