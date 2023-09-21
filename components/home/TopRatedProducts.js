@@ -4,13 +4,13 @@ import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { toast } from 'react-toastify';
 import * as Mui from '../muiImportComponents/HomeMUI';
 import deviceDimension from '../../utils/devicePixel';
 // Import Swiper css
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { toast } from 'react-toastify';
 
 const ProductCard = dynamic(() => import('../products/ProductCard'));
 
