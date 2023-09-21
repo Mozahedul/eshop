@@ -238,10 +238,11 @@ const Order = ({ params }) => {
                       <Mui.TableRow key={item._id}>
                         <Mui.TableCell>
                           <Image
-                            src={item.images[0].replace('./public', '')}
+                            src={item.images[0]}
                             alt={item.title}
                             width="50"
                             height="50"
+                            priority
                           />
                         </Mui.TableCell>
                         <Mui.TableCell>{item.title}</Mui.TableCell>

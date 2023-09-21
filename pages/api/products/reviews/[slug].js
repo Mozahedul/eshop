@@ -18,7 +18,11 @@ handler.get(async (req, res) => {
       .exec();
 
     // console.log('GET RATINGS ==> ', getRatings.reviews);
-    res.send(getRatings.reviews);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(getRatings.reviews);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
     res.send(error);

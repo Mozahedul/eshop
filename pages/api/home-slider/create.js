@@ -32,7 +32,12 @@ handler.post(upload.single('avatar'), async (req, res) => {
     });
 
     const savedBanner = await banner.save();
-    res.status(200).send(savedBanner);
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(savedBanner);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
 
     setTimeout(function () {
       if (res.statusCode === 200 && req.file.path) {

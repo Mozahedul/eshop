@@ -5,6 +5,7 @@ import { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import deviceDimension from '../../utils/devicePixel';
 import * as Mui from '../muiImportComponents/HomeMUI';
+import { toast } from 'react-toastify';
 
 const ProductCard = dynamic(() => import('../products/ProductCard'));
 
@@ -30,10 +31,17 @@ const BestSelling = ({ pixel, setPixel }) => {
           { cancelToken: source.token }
         );
 
+        console.log('RESPONSE ===> ', response.data);
+
         if (response.statusText === 'OK') {
           setBestSellingProducts(response.data);
         } else {
-          throw new Error('Something went wrong on the server');
+          toast.error(response.data.errMsg, {
+            position: 'top-center',
+            autoClose: 1000,
+            theme: 'colored',
+            pauseOnHover: true,
+          });
         }
       } catch (error) {
         if (axios.isCancel(error)) {
@@ -50,7 +58,7 @@ const BestSelling = ({ pixel, setPixel }) => {
       source.cancel('Operation cancelled by user');
       // isDiscarded = true;
     };
-  }, [setPixel]);
+  }, [setPixel, setBestSellingProducts]);
   return bestSellingProducts &&
     Array.isArray(bestSellingProducts) &&
     bestSellingProducts.length > 0 ? (

@@ -16,7 +16,11 @@ handler.get(async (req, res) => {
       return { ...banner.toObject(), image: cloudImage };
     });
 
-    res.send(updatedBanners);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedBanners);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
     res.send(error);

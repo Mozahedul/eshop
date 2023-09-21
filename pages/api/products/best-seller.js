@@ -12,8 +12,8 @@ handler.get(async (req, res) => {
 
     const modifiedProducts = await Promise.all(
       bestProducts.map(async product => {
-        const cloudPromise = product.images.map(async image => {
-          const getCloudImages = await viewCloudinaryImage(image);
+        const cloudPromise = product.images.map(image => {
+          const getCloudImages = viewCloudinaryImage(image);
           return getCloudImages;
         });
         const cloudImages = await Promise.all(cloudPromise);
@@ -22,17 +22,13 @@ handler.get(async (req, res) => {
     );
 
     if (res.statusCode >= 200 && res.statusCode <= 299) {
-      if (Array.isArray(bestProducts) && bestProducts?.length > 0) {
-        res.status(200).send(modifiedProducts);
-      } else {
-        throw new Error('Product not found in database collection');
-      }
+      res.send(modifiedProducts);
     } else {
-      throw new Error('Something went wrong in the server');
+      res.send({ errMsg: 'Something went wrong in the server' });
     }
     await db.disconnect();
   } catch (error) {
-    res.send('Error in backend ==> ', error.message);
+    res.send({ errMsg: error.message });
   }
 });
 export default handler;

@@ -21,11 +21,11 @@ handler.delete(async (req, res) => {
 
       console.log('BANNER DELETED ==> ', bannerExist);
 
-      if (bannerDeleted && 'title' in bannerDeleted) {
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
         res.send({ message: 'Banner deleted successfully' });
-        if (res.statusCode === 200) {
-          fs.unlinkSync(bannerDeleted.image);
-        }
+        fs.unlinkSync(bannerDeleted.image);
+      } else {
+        res.send({ errMsg: 'Something went wrong on the server' });
       }
     } else {
       res.send({ errMessage: 'No Banner found' });

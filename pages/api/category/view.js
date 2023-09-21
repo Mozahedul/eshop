@@ -29,7 +29,11 @@ handler.get(async (req, res) => {
       })
     );
 
-    res.send(updateCategories);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updateCategories);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (err) {
     res.status(404).send(getError(err));
   }

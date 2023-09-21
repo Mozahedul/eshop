@@ -13,8 +13,13 @@ handler.get(async (req, res) => {
     const orders = await OrderModel.find({ user: req.user._id }).sort({
       field: 'desc',
     });
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(orders);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
-    res.send(orders);
   } catch (err) {
     res.status(404).send(getError(err));
   }

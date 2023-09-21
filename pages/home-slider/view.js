@@ -117,6 +117,7 @@ const View = () => {
                         alt={banner.title}
                         width={40}
                         height={40}
+                        priority
                       />
                     </Mui.TableCell>
                     <Mui.TableCell align="right">

@@ -341,6 +341,7 @@ const Create = () => {
                         border: '1px solid rgb(230, 230, 230)',
                         boxShadow: '0 0 6px 1px lightgrey',
                       }}
+                      priority
                     />
                   </Mui.ImageListItem>
                 ))}

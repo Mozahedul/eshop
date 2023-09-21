@@ -6,6 +6,11 @@ import { viewCloudinaryImage } from '../cloudinary/cloudinary-config';
 
 const handler = nc();
 
+/**
+ * @method GET
+ * @param {request, response}
+ * @return newly arrived products
+ */
 handler.get(async (req, res) => {
   try {
     db.connect();
@@ -25,7 +30,11 @@ handler.get(async (req, res) => {
       })
     );
 
-    res.send(newArrivalsUpdated);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(newArrivalsUpdated);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     db.disconnect();
   } catch (error) {
     res.send(getError(error));

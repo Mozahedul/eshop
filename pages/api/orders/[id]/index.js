@@ -11,7 +11,12 @@ handler.get(async (req, res) => {
     await db.connect();
     const order = await OrderModel.findById(req.query.id);
     await db.disconnect();
-    res.send(order);
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(order);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (err) {
     res.send(err);
   }

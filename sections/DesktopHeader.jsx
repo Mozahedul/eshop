@@ -174,7 +174,13 @@ const DesktopHeader = () => {
           }}
         >
           <Link href="/">
-            <Image src="/logo.png" alt="home loog" width={120} height={48} />
+            <Image
+              src="/logo.png"
+              alt="home loog"
+              width={120}
+              height={48}
+              priority
+            />
           </Link>
           <List sx={{ flexGrow: 0.5 }}>
             <SearchForm />

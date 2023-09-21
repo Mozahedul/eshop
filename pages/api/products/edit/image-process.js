@@ -33,11 +33,15 @@ handler.post(upload.array('avatar', 6), async (req, res) => {
   });
 
   console.log(images);
+  if (res.statusCode >= 200 && res.statusCode <= 299) {
+    res.send(images);
+  } else {
+    res.send({ errMsg: 'Something went wrong on the server' });
+  }
 
   setTimeout(() => {
     req.files?.map(imgFile => fs.unlinkSync(imgFile.path));
   }, 2000);
-  res.send(images);
 });
 
 export default handler;

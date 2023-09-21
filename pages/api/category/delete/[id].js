@@ -26,11 +26,18 @@ handler.delete(async (req, res) => {
         _id: req.query.id,
       }).exec();
 
+      console.log('DELETE CATEGORY ==> ', delCategory);
+      console.log('RESPONSE CATEGORY => ', res);
       // Delete images from cloudinary
-      categoryExist.image.length &&
+      categoryExist.image.length > 0 &&
         categoryExist.image.map(file => deleteCloudinaryImage(file));
 
-      res.send(delCategory);
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
+        res.send(delCategory);
+      } else {
+        res.send({ errMsg: 'Something went wrong on the server' });
+      }
+
       db.disconnect();
     } else {
       res.send({ message: 'Category not found' });

@@ -29,12 +29,14 @@ handler.get(async (req, res) => {
       { $sort: { productCount: -1 } },
     ]);
 
-    console.log('CATEGORIES BACKEND ==> ', categories);
-
-    res.send(categories);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(categories);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
-    res.send(error);
+    res.send({ errMsg: error.message });
   }
 
   // try {

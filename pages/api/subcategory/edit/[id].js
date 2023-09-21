@@ -14,15 +14,15 @@ handler.get(async (req, res) => {
   // console.log('REQUEST BODY ==> ', req.body);
   try {
     await db.connect();
-    Subcategories.findById({ _id: req.query.id })
+    const subcategory = Subcategories.findById({ _id: req.query.id })
       .populate('parentCategory', 'name')
-      .exec((err, info) => {
-        if (!err) {
-          res.send(info);
-        } else {
-          res.send(err);
-        }
-      });
+      .exec();
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(subcategory);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
 
     await db.disconnect();
   } catch (err) {

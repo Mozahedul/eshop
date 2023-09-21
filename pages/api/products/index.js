@@ -24,7 +24,12 @@ handler.get(async (req, res) => {
         return { ...product.toObject(), images: transoformedCloudImages };
       })
     );
-    res.status(201).send(updatedProducts);
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedProducts);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (error) {
     res.send({ message: error });
   }

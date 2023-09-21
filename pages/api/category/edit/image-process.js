@@ -30,7 +30,11 @@ handler.post(upload.array('catImages', 6), async (req, res) => {
     });
 
     console.log(updatedImages);
-    res.status(200).send(updatedImages);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedImages);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
 
     setTimeout(() => {
       req.files.map(file => fs.unlinkSync(file.path));

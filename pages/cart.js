@@ -117,6 +117,7 @@ const CartScreen = () => {
                             alt={item.title}
                             width="50"
                             height="50"
+                            priority
                           />
                         </Link>
                       </TableCell>

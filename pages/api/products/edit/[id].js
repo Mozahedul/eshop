@@ -28,7 +28,11 @@ handler.get(async (req, res) => {
     const cloudinaryImages = await Promise.all(cloudinaryPromise);
     product.images = cloudinaryImages;
 
-    res.send(product);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(product);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
     res.send({ errMessage: error });
@@ -63,7 +67,7 @@ handler.put(async (req, res) => {
       return null;
     });
 
-    Product.findByIdAndUpdate(
+    const isProductUpdated = Product.findByIdAndUpdate(
       { _id: req.query.id },
       {
         title,
@@ -81,17 +85,18 @@ handler.put(async (req, res) => {
         countInStock,
         sold,
       }
-    ).exec(err => {
-      if (!err) {
-        res.send({ message: 'Product Updated Successfully' });
-        if (removeProductImg && removeProductImg.length > 0) {
-          removeProductImg.map(img => fs.unlinkSync(img.path));
-        }
-      } else {
-        res.send({ errMessage: getError(err) });
-        removeProductImg.map(img => fs.unlinkSync(img.path));
-      }
-    });
+    ).exec();
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send({ message: 'Product Updated Successfully' });
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
+
+    // Delete images from local
+    if (removeProductImg && removeProductImg.length > 0) {
+      removeProductImg.map(img => fs.unlinkSync(img.path));
+    }
     await db.disconnect();
   } catch (err) {
     console.log(getError(err));

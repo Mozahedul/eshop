@@ -107,7 +107,13 @@ const MobileHeader = () => {
       >
         <List sx={{ display: 'flex', alignItems: 'center' }}>
           <Link href="/">
-            <Image src="/logo.png" alt="home loog" width={90} height={36} />
+            <Image
+              src="/logo.png"
+              alt="home loog"
+              width={90}
+              height={36}
+              priority
+            />
           </Link>
           <IconButton
             color="primary"

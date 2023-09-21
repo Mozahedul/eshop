@@ -105,7 +105,7 @@ const Profile = () => {
     // if (!isCancelled.current) {
     if (!userInfo) {
       router.push('/login');
-      return true;
+      return () => true;
     }
 
     setValue('name', userInfo.name);
@@ -114,7 +114,7 @@ const Profile = () => {
     // return () => {
     //   isCancelled.current = true;
     // };
-    return true;
+    return () => true;
   }, [userInfo, router, setValue]);
 
   return (

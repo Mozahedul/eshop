@@ -28,7 +28,12 @@ handler.get(async (req, res) => {
     );
 
     db.disconnect();
-    res.send(modifiedProducts);
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(modifiedProducts);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (error) {
     res.send(error);
   }

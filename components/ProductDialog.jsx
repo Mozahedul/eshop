@@ -58,6 +58,7 @@ const ProductDialog = ({ open, setOpen, product, cartRef, cardRef }) => {
             width="600"
             height="600"
             alt={product.title}
+            priority
           />
         </Grid>
         <Grid item xs={12} md={7}>

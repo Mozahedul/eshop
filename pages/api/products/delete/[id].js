@@ -27,8 +27,10 @@ handler.delete(async (req, res) => {
       // Delete images in cloudinary
       productExist.images.map(image => deleteCloudinaryImage(image));
 
-      if (productDeleted && productDeleted._id) {
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
         res.send(productDeleted);
+      } else {
+        res.send({ errMsg: 'Something went wrong on the server' });
       }
     } else {
       res.send({ message: 'No product found' });

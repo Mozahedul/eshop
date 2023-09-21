@@ -33,10 +33,14 @@ handler.get(async (req, res) => {
     const cloudImage = viewCloudinaryImage(banner.image);
     banner.image = cloudImage;
 
-    res.send(banner);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(banner);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (err) {
-    res.send(err);
+    res.send({ errMsg: err.message });
   }
 });
 

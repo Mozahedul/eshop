@@ -67,7 +67,7 @@ const HomeSlider = () => {
               alt={banner.title}
               width="1280"
               height="500"
-              layout="responsive"
+              priority
             />
             <Mui.Box
               className="textOverlay"

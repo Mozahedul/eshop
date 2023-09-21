@@ -20,10 +20,14 @@ handle.get(async (req, res) => {
         return { ...product.toObject(), images: productImages };
       })
     );
-    res.send(updatedProducts);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedProducts);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
-    res.send(error);
+    res.send({ errMsg: error.message });
   }
 });
 

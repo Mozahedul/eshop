@@ -218,6 +218,7 @@ const Edit = () => {
                         borderRadius: '2px',
                         border: '1px solid rgb(230, 230, 230)',
                       }}
+                      priority
                     />
                     <Mui.IconButton
                       variant="contained"

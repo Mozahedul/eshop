@@ -14,7 +14,11 @@ handler.get(async (req, res) => {
       { $sort: { count: -1 } },
     ]);
 
-    res.send(brandCounts);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(brandCounts);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
     res.send(error);

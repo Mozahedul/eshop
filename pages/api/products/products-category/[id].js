@@ -25,9 +25,14 @@ handler.get(async (req, res) => {
         return { ...product.toObject(), images: imagesFromCloudinary };
       })
     );
-    res.send(updatedProducts);
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedProducts);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (error) {
-    console.log(error);
+    console.log({ errMsg: error.message });
   }
 });
 

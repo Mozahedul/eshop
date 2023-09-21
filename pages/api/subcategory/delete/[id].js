@@ -9,14 +9,14 @@ handler.delete(async (req, res) => {
     const deletedSubCat = await Subcategory.findByIdAndRemove({
       _id: req.query.id,
     });
-    if (deletedSubCat !== null) {
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
       res.send(deletedSubCat);
     } else {
-      res.send({ errMessage: 'SubCategory cannot be deleted' });
+      res.send({ errMsg: 'Something went wrong on the server' });
     }
     await db.disconnect();
   } catch (err) {
-    res.send(err);
+    res.send({ errMsg: err.message });
   }
 });
 

@@ -13,6 +13,11 @@ const handler = nc();
 
 handler.use(isAuth);
 
+/**
+ * @method GET
+ * @param {request, response}
+ * @return fetch category and send to the client
+ */
 handler.get(async (req, res) => {
   try {
     db.connect();
@@ -24,10 +29,15 @@ handler.get(async (req, res) => {
     const cloudinaryImages = await Promise.all(updatedImages);
     category.image = cloudinaryImages;
 
-    res.send(category);
+    // Send category to client
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(category);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     db.disconnect();
   } catch (err) {
-    res.status(404).send(getError(err));
+    res.send({ errMsg: err.message });
   }
 });
 
@@ -58,10 +68,14 @@ handler.put(async (req, res) => {
       }
     ).exec();
 
-    res.send({
-      data: updateCategory,
-      message: 'Category Updated Successfully',
-    });
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send({
+        data: updateCategory,
+        message: 'Category Updated Successfully',
+      });
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (err) {
     res.status(404).send(err);

@@ -10,6 +10,7 @@ import deviceDimension from '../../utils/devicePixel';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { toast } from 'react-toastify';
 
 const ProductCard = dynamic(() => import('../products/ProductCard'));
 
@@ -27,6 +28,13 @@ const TopRatedProducts = ({ pixel, setPixel }) => {
         );
         if (response.statusText === 'OK') {
           setTopRated(response.data);
+        } else {
+          toast.error(response.data.errMsg, {
+            position: 'top-center',
+            autoClose: 1000,
+            pauseOnHover: true,
+            theme: 'colored',
+          });
         }
       };
       fetchTopRatedProducts();

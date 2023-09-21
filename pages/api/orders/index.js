@@ -18,10 +18,15 @@ handler.post(async (req, res) => {
       user: req.user._id,
     });
     const order = await newOrder.save();
+
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(order);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
-    res.status(201).send(order);
   } catch (err) {
-    res.send(err);
+    res.send({ errMsge: err.message });
   }
 });
 

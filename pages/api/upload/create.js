@@ -46,15 +46,16 @@ handler.post(upload.array('avatar', 6), async function (req, res) {
       const categoryData = await categoryInstance.save();
 
       // send success message to frontend
-      if (categoryData) {
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
         res.send({
+          data: categoryData,
           message: 'Category added successfully',
         });
         setTimeout(() => {
           req.files.map(file => fs.unlinkSync(file.path));
         }, 2000);
       } else {
-        res.status(404).send({ errMessage: 'Category not inserted' });
+        res.send({ errMsg: 'Category not inserted' });
         setTimeout(() => {
           req.files.map(file => fs.unlinkSync(file.path));
         }, 2000);

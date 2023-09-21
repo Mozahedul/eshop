@@ -231,10 +231,10 @@ const ProductScreen = props => {
                 <Image
                   src={image}
                   alt={product.title}
-                  layout="responsive"
                   width={100}
                   height={100}
                   style={{ borderRadius: '5px' }}
+                  priority
                 />
               </Mui.Box>
             ))}
@@ -290,8 +290,8 @@ const ProductScreen = props => {
                 alt={product.title}
                 width={500}
                 height={500}
-                layout="responsive"
                 style={{ borderRadius: '5px' }}
+                priority
               />
             </ReactImageMagnify>
           </Mui.Box>

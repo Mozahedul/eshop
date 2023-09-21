@@ -155,7 +155,7 @@ const Edit = () => {
 
           {image ? (
             <Mui.FormControl sx={{ marginBottom: '15px' }}>
-              <Image src={image} alt={image} width="50" height="50" />
+              <Image src={image} alt={image} width="50" height="50" priority />
             </Mui.FormControl>
           ) : null}
 

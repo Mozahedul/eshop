@@ -21,10 +21,14 @@ handler.get(async (req, res) => {
       };
     });
 
-    res.send(updatedBanner);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(updatedBanner);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
     await db.disconnect();
   } catch (error) {
-    res.send(error);
+    res.send({ errMsg: error.message });
   }
 });
 

@@ -16,7 +16,11 @@ handler.get(async (req, res) => {
     ]);
 
     // console.log('MAX PRICE ==> ', maxMin);
-    res.send(maxMin);
+    if (res.statusCode >= 200 && res.statusCode <= 299) {
+      res.send(maxMin);
+    } else {
+      res.send({ errMsg: 'Something went wrong on the server' });
+    }
   } catch (error) {
     res.send(error);
   }

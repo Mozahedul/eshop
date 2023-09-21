@@ -24,8 +24,13 @@ handler.put(async (req, res) => {
       };
 
       const newOrder = await order.save();
+
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
+        res.send({ message: 'Order paid', data: newOrder });
+      } else {
+        res.send({ errMsg: 'Something went wrong on the server' });
+      }
       await db.disconnect();
-      res.send({ message: 'Order paid', data: newOrder });
     } else {
       db.disconnect();
       res.status(404).send({ errMessage: 'Order not created' });

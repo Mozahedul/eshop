@@ -23,6 +23,7 @@ const ImageFallback = ({ src, fallbackSrc, alt, ...rest }) => {
       onError={() => {
         setImgSrc(fallbackSrc);
       }}
+      priority
     />
   );
 };

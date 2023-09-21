@@ -80,7 +80,11 @@ handler.post(upload.array('avatar', 10), async function (req, res) {
 
       // Save to database
       await product.save();
-      res.status(201).send({ message: 'Product has been added successfully' });
+      if (res.statusCode >= 200 && res.statusCode <= 299) {
+        res.send({ message: 'Product has been added successfully' });
+      } else {
+        res.send({ errMsg: 'Something went wrong on the server' });
+      }
 
       // Delete the files from local images folder
       req.files.map(file => fs.unlinkSync(file.path));
