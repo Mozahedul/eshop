@@ -96,7 +96,7 @@ handler.post(upload.array('avatar', 10), async function (req, res) {
         errMessage: 'Product already exist: duplicate entry attempts failed',
       });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     setTimeout(() => {
       req.files.forEach(imageFile => fs.unlinkSync(imageFile));

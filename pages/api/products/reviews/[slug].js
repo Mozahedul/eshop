@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
     } else {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }
@@ -89,7 +89,7 @@ handler.post(async (req, res) => {
       // res.status(404);
       throw new Error('Product not found');
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     // console.log('Error in review: ==> ', error.message);
     res.send({ errMsg: error.message });

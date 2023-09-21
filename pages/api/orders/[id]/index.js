@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
   try {
     await db.connect();
     const order = await OrderModel.findById(req.query.id);
-    await db.disconnect();
+    // await db.disconnect();
 
     if (res.statusCode >= 200 && res.statusCode <= 299) {
       res.send(order);

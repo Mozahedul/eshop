@@ -37,7 +37,7 @@ handler.get(async (req, res) => {
     } else {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     console.log(error);
   }

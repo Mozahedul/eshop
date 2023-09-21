@@ -33,7 +33,7 @@ handler.get(async (req, res) => {
     } else {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send({ errMessage: error });
   }
@@ -97,7 +97,7 @@ handler.put(async (req, res) => {
     if (removeProductImg && removeProductImg.length > 0) {
       removeProductImg.map(img => fs.unlinkSync(img.path));
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     console.log(getError(err));
   }

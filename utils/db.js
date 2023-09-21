@@ -18,12 +18,12 @@ async function connect() {
   }
 }
 
-async function disconnect() {
-  if (process.env.NODE_ENV === 'production') {
-    await mongoose.disconnect();
-  }
-  console.log('DB not disconnected in', process.env.NODE_ENV);
-}
+// async function disconnect() {
+//   if (process.env.NODE_ENV === 'production') {
+//     await mongoose.disconnect();
+//   }
+//   console.log('DB not disconnected in', process.env.NODE_ENV);
+// }
 
 // Here doc is a mongodb document
 // convertDocToObj is a helper function which convert mongoose
@@ -36,6 +36,6 @@ async function convertDocToObj(doc) {
   return docData;
 }
 
-const db = { connect, disconnect, convertDocToObj };
+const db = { connect, convertDocToObj };
 
 export default db;

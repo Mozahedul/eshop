@@ -38,7 +38,7 @@ handler.delete(async (req, res) => {
     // setTimeout(() => {
     //   productExist.images.map(file => fs.unlinkSync(file));
     // }, 2000);
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     console.log(error);
   }

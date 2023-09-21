@@ -24,7 +24,7 @@ handler.post(async (req, res) => {
     } else {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send({ errMsge: err.message });
   }

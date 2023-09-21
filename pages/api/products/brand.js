@@ -47,7 +47,7 @@ handler.get(async (req, res) => {
       }
     }
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }

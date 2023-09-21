@@ -30,7 +30,7 @@ handler.delete(async (req, res) => {
     } else {
       res.send({ errMessage: 'No Banner found' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }

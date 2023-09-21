@@ -14,7 +14,7 @@ handler.get(async (req, res) => {
     const categories = await Categories.find({})
       .sort([['createdAt', 'desc']])
       .exec();
-    await db.disconnect();
+    // await db.disconnect();
 
     // Fetch category images from cloudinary
     const updateCategories = await Promise.all(

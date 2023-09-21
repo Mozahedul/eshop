@@ -38,7 +38,7 @@ handler.get(async (req, res) => {
     } else {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send({ errMsg: err.message });
   }
@@ -78,7 +78,7 @@ handler.put(upload.single('avatar'), async (req, res) => {
       res.send('No banner found');
     }
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }

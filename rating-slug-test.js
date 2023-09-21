@@ -17,7 +17,7 @@ handler.get(async (req, res) => {
 
     // console.log('GET RATINGS ==> ', getRatings);
     res.send(getRatings.reviews);
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }
@@ -92,7 +92,7 @@ handler.patch(async (req, res) => {
     }
 
     // console.log('REVIEW BACKEND ==> ', reviews);
-    await db.disconnect();
+    // await db.disconnect();
   } catch (error) {
     res.send(error);
   }

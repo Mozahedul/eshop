@@ -25,7 +25,7 @@ handler.get(async (req, res) => {
   // await CategoryModel.insertMany(data.category);
   // await SubCategoryModel.insertMany(data.subcategory);
   // await Product.insertMany(data.products);
-  await db.disconnect();
+  // await db.disconnect();
   res.send({ message: 'Data inserted into database successfully' });
 });
 

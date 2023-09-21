@@ -10,7 +10,7 @@ handler.get(async (req, res) => {
   try {
     await db.connect();
     const products = await Product.find({});
-    await db.disconnect();
+    // await db.disconnect();
 
     // Fetch images from cloudinary
     const updatedProducts = await Promise.all(

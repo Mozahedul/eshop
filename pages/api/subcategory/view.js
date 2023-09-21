@@ -28,7 +28,7 @@ handler.get(async (req, res) => {
     // });
     // console.log('SUBCATEGORY BACKEND ==> ', subcategories);
 
-    await db.disconnect();
+    // await db.disconnect();
     // res.send(subcategories);
   } catch (err) {
     console.log(err);

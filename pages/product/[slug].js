@@ -649,7 +649,7 @@ export async function getServerSideProps(context) {
   const product = await Product.findOne({ slug })
     .populate('categories', 'name')
     .lean();
-  await db.disconnect();
+  // await db.disconnect();
 
   // Cloudinary image fetching
   const imagePromise = product.images.map(async file => {

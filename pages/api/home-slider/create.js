@@ -48,7 +48,7 @@ handler.post(upload.single('avatar'), async (req, res) => {
       }
     }, 1000);
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send(err);
   }

@@ -32,7 +32,7 @@ export async function categoryCreate(req, res, filesCloudinary) {
         image: filesCloudinary,
       });
       const categoryData = await categoryInstance.save();
-      await db.disconnect();
+      // await db.disconnect();
 
       if (categoryData) {
         res.status(201).send({

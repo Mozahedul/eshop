@@ -42,7 +42,7 @@ handler.delete(async (req, res) => {
     } else {
       res.send({ message: 'Category not found' });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send(getError(err));
   }

@@ -24,7 +24,7 @@ handler.get(async (req, res) => {
       res.send({ errMsg: 'Something went wrong on the server' });
     }
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     console.log(err);
   }
@@ -57,7 +57,7 @@ handler.put(async (req, res) => {
       removedSubCatImage.map(item => fs.unlinkSync(item));
     }, 2000);
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send(getError(err));
   }

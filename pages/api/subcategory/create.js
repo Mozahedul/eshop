@@ -71,7 +71,7 @@ handler.post(upload.array('avatar', 3), async (req, res) => {
       req.files?.map(item => fs.unlinkSync(item.path));
     }, 2000);
 
-    await db.disconnect();
+    // await db.disconnect();
   } catch (err) {
     res.send(getError(err));
   }

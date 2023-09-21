@@ -68,7 +68,7 @@ handler.post(upload.array('avatar', 6), async function (req, res) {
         errMessage: 'Category already exist: duplicate entry attempts failed',
       });
     }
-    await db.disconnect();
+    // await db.disconnect();
   } catch (errors) {
     res.send({ errMessage: `Error from image upload, ${getError(errors)}` });
   }
