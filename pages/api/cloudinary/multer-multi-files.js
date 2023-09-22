@@ -10,7 +10,7 @@ export const config = {
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, './');
+    cb(null, './images');
   },
   filename(req, file, cb) {
     const fileExt = path.extname(file.originalname);
