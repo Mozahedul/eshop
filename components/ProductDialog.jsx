@@ -54,7 +54,7 @@ const ProductDialog = ({ open, setOpen, product, cartRef, cardRef }) => {
       >
         <Grid item xs={12} md={5}>
           <Image
-            src={product?.images?.[0].replace('./public', '')}
+            src={product?.images?.[0]}
             width="600"
             height="600"
             alt={product.title}

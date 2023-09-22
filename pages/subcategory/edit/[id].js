@@ -291,7 +291,7 @@ const Edit = () => {
                 {images.map((image, index) => (
                   <Mui.ImageListItem key={image}>
                     <Image
-                      src={image.replace('./public', '')}
+                      src={image}
                       alt="subcategory"
                       width="40"
                       height="40"

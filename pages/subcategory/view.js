@@ -156,7 +156,7 @@ const View = () => {
                         <ImageFallback
                           src={
                             subcategory?.image.length > 0
-                              ? subcategory?.image[0].replace('./public', '')
+                              ? subcategory?.image[0]
                               : '/placeholder.png'
                           }
                           fallbackSrc="/placeholder.png"

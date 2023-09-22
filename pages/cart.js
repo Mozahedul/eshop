@@ -113,7 +113,7 @@ const CartScreen = () => {
                       <TableCell>
                         <Link href={`/product/${item.slug}`}>
                           <Image
-                            src={item.images[0].replace('./public', '')}
+                            src={item.images[0]}
                             alt={item.title}
                             width="50"
                             height="50"

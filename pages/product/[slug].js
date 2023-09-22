@@ -265,14 +265,10 @@ const ProductScreen = props => {
                 smallImage: {
                   alt: product.title,
                   isFluidWidth: true,
-                  src:
-                    showImg.replace('./public', '') ||
-                    product.images[0].replace('./public', ''),
+                  src: showImg || product.images[0],
                 },
                 largeImage: {
-                  src:
-                    showImg.replace('./public', '') ||
-                    product.images[0].replace('./public', ''),
+                  src: showImg || product.images[0],
                   width: 1200,
                   height: 1200,
                 },

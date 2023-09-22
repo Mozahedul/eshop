@@ -10,7 +10,7 @@ export const config = {
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
-    cb(null, './public');
+    cb(null, './');
   },
   filename(req, file, cb) {
     const fileExt = path.extname(file.originalname);
