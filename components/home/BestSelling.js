@@ -19,7 +19,7 @@ const BestSelling = ({ pixel, setPixel }) => {
   useEffect(() => {
     // let isDiscarded = false;
     setPixel(deviceDimension());
-    const source = axios.CancelToken.source();
+    // const source = axios.CancelToken.source();
     // if (!isDiscarded) {
     const fetchBestSellingProducts = async () => {
       try {
@@ -27,37 +27,37 @@ const BestSelling = ({ pixel, setPixel }) => {
           {
             method: 'get',
             url: '/api/products/best-seller',
-          },
-          { cancelToken: source.token }
+          }
+          // { cancelToken: source.token }
         );
 
-        console.log('RESPONSE ===> ', response.data);
+        // console.log('RESPONSE ===> ', response.data);
 
-        if (response.statusText === 'OK') {
-          setBestSellingProducts(response.data);
-        } else {
-          toast.error(response.data.errMsg, {
-            position: 'top-center',
-            autoClose: 1000,
-            theme: 'colored',
-            pauseOnHover: true,
-          });
-        }
+        // if (response.statusText === 'OK') {
+        setBestSellingProducts(response.data);
+        // } else {
+        toast.error(response.data.errMsg, {
+          position: 'top-center',
+          autoClose: 1000,
+          theme: 'colored',
+          pauseOnHover: true,
+        });
+        // }
       } catch (error) {
-        if (axios.isCancel(error)) {
-          // console.log('Request cancelled ==> ', error.message);
-        } else {
-          // console.log('Error without axios ==> ', error.message);
-        }
+        // if (axios.isCancel(error)) {
+        console.log('Request cancelled ==> ', error.message);
+        // } else {
+        // console.log('Error without axios ==> ', error.message);
+        // }
       }
     };
 
     fetchBestSellingProducts();
     // }
-    return () => {
-      source.cancel('Operation cancelled by user');
-      // isDiscarded = true;
-    };
+    // return () => {
+    //   source.cancel('Operation cancelled by user');
+    // isDiscarded = true;
+    // };
   }, [setPixel, setBestSellingProducts]);
   return bestSellingProducts &&
     Array.isArray(bestSellingProducts) &&

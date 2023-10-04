@@ -27,11 +27,11 @@ const HomeSlider = () => {
           // { cancelToken: source.token }
         );
 
-        if (response.statusText === 'OK') {
-          setBannerData(response.data);
-        } else {
-          throw new Error('Something went wrong on the server');
-        }
+        // if (response.statusText === 'OK') {
+        setBannerData(response.data);
+        // } else {
+        //   throw new Error('Something went wrong on the server');
+        // }
       } catch (error) {
         // if (axios.isCancel(error)) {
         console.log('Request cancelled ==> ', error.message);
