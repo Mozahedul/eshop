@@ -12,7 +12,7 @@ const HomeSlider = () => {
   const router = useRouter();
   useEffect(() => {
     // let isDiscarded = false;
-    const source = axios.CancelToken.source();
+    // const source = axios.CancelToken.source();
     // for browser responsiveness
     // setPixel(deviceDimension());
     // if (!isDiscarded) {
@@ -23,8 +23,8 @@ const HomeSlider = () => {
           {
             method: 'get',
             url: '/api/home-slider/banner/view',
-          },
-          { cancelToken: source.token }
+          }
+          // { cancelToken: source.token }
         );
 
         if (response.statusText === 'OK') {
@@ -33,19 +33,19 @@ const HomeSlider = () => {
           throw new Error('Something went wrong on the server');
         }
       } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log('Request cancelled ==> ', error.message);
-        } else {
-          console.log('Error without axios ==> ', error.message);
-        }
+        // if (axios.isCancel(error)) {
+        console.log('Request cancelled ==> ', error.message);
+        // } else {
+        //   console.log('Error without axios ==> ', error.message);
+        // }
       }
     };
     fetchBanners();
     // }
-    return () => {
-      // isDiscarded = true;
-      source.cancel();
-    };
+    // return () => {
+    // isDiscarded = true;
+    //   source.cancel();
+    // };
   }, []);
   return (
     <Swiper
