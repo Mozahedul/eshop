@@ -16,7 +16,7 @@ const NewArrival = ({ pixel, setPixel }) => {
   // const isCancelled = useRef(false);
   useEffect(() => {
     setPixel(deviceDimension());
-    const source = axios.CancelToken.source();
+    // const source = axios.CancelToken.source();
     // if (!isCancelled.current) {
     const fetchProducts = async () => {
       try {
@@ -25,28 +25,28 @@ const NewArrival = ({ pixel, setPixel }) => {
           {
             method: 'get',
             url: '/api/home/new-arrivals',
-          },
-          { cancelToken: source.token }
+          }
+          // { cancelToken: source.token }
         );
-        if (response.statusText === 'OK') {
-          setProducts(response.data);
-        } else {
-          throw new Error('Something happened wrong on the server');
-        }
+        // if (response.statusText === 'OK') {
+        setProducts(response.data);
+        // } else {
+        throw new Error('Something happened wrong on the server');
+        // }
       } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log('Request not completed ==> ', error.message);
-        } else {
-          console.log('Error without axios ==> ', error.message);
-        }
+        // if (axios.isCancel(error)) {
+        console.log('Request not completed ==> ', error.message);
+        // } else {
+        // console.log('Error without axios ==> ', error.message);
+        // }
       }
     };
     fetchProducts();
     // }
-    return () => {
-      // isCancelled.current = true;
-      source.cancel('Operation cancelled by user');
-    };
+    // return () => {
+    // isCancelled.current = true;
+    //   source.cancel('Operation cancelled by user');
+    // };
   }, [setProducts, setPixel]);
   // products - check if products array is null or undefined
   // Array.isArray(products) - check that is array or other data type
