@@ -67,7 +67,7 @@ handler.put(async (req, res) => {
       return null;
     });
 
-    const isProductUpdated = Product.findByIdAndUpdate(
+    await Product.findByIdAndUpdate(
       { _id: req.query.id },
       {
         title,

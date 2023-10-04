@@ -3,7 +3,6 @@ import slugify from 'slugify';
 import Categories from '../../../../models/Category';
 import { isAuth } from '../../../../utils/auth';
 import db from '../../../../utils/db';
-import { getError } from '../../../../utils/error';
 import {
   deleteCloudinaryImage,
   viewCloudinaryImage,

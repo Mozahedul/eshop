@@ -45,7 +45,7 @@ handler.post(upload.array('avatar', 10), async function (req, res) {
       const uploadPromises = req.files.map(async file => {
         try {
           // Send multer processed images to uploadImage function
-          // for sending to cloudinaryl.
+          // for sending to cloudinary
           const publicId = await uploadImage(file.path.toString());
           return publicId;
         } catch (error) {
