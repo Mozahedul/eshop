@@ -122,15 +122,15 @@ const ProductScreen = props => {
 
   // For viewing the reviews
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    // const source = axios.CancelToken.source();
     try {
       dispatch({ type: 'REVIEW_REQUEST' });
       const fetchRatings = async () => {
         const response = await axios(
-          { method: 'get', url: `/api/products/reviews/${product.slug}` },
-          {
-            cancelToken: source.token,
-          }
+          { method: 'get', url: `/api/products/reviews/${product.slug}` }
+          // {
+          //   cancelToken: source.token,
+          // }
         );
 
         if (response.status >= 200 && response.status <= 299) {
@@ -154,9 +154,9 @@ const ProductScreen = props => {
       });
     }
 
-    return () => {
-      source.cancel();
-    };
+    // return () => {
+    //   source.cancel();
+    // };
   }, [product, userToken, dispatch, setValue]);
 
   // Get cart item from local storage

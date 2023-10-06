@@ -18,13 +18,13 @@ const TopRatedProducts = ({ pixel, setPixel }) => {
   const [topRated, setTopRated] = useState([]);
 
   useEffect(() => {
-    const source = axios.CancelToken.source();
+    // const source = axios.CancelToken.source();
     setPixel(deviceDimension());
     try {
       const fetchTopRatedProducts = async () => {
         const response = await axios(
-          { method: 'get', url: '/api/home/top-rated' },
-          { cancelToken: source.token }
+          { method: 'get', url: '/api/home/top-rated' }
+          // { cancelToken: source.token }
         );
         if (response.statusText === 'OK') {
           setTopRated(response.data);
@@ -46,9 +46,9 @@ const TopRatedProducts = ({ pixel, setPixel }) => {
       }
     }
 
-    return () => {
-      source.cancel();
-    };
+    // return () => {
+    //   source.cancel();
+    // };
   }, [setTopRated, setPixel]);
   return topRated && Array.isArray(topRated) && topRated.length > 0 ? (
     <>

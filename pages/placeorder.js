@@ -139,22 +139,27 @@ const PlaceOrder = () => {
   }, [userInfo, paymentMeth, router]);
 
   useEffect(() => {
-    let isOut = false;
-    if (!isOut) {
-      // if cart items, shipping address
-      // payment method is absent, then we will redirect
-      // to home page
-      if (
-        Object.keys(shipAddress).length < 1 &&
-        paymentMeth === '' &&
-        shoppingCartItems.length < 1
-      ) {
-        router.push('/');
-      }
+    // let isOut = false;
+    // if (!isOut) {
+    // if cart items, shipping address
+    // payment method is absent, then we will redirect
+    // to home page
+
+    console.log(Object.keys(shipAddress));
+    console.log(paymentMeth);
+    console.log(shoppingCartItems);
+
+    if (
+      Object.keys(shipAddress).length < 1 &&
+      paymentMeth &&
+      shoppingCartItems.length < 1
+    ) {
+      router.push('/');
     }
-    return () => {
-      isOut = true;
-    };
+    // }
+    // return () => {
+    //   isOut = true;
+    // };
   }, [shipAddress, paymentMeth, shoppingCartItems, router]);
 
   return (
