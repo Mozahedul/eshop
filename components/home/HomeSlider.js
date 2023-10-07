@@ -1,5 +1,5 @@
 import axios from 'axios';
-import Image from 'next/legacy/image';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { Autoplay, Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -61,13 +61,15 @@ const HomeSlider = () => {
     >
       {bannerData?.map(banner => (
         <SwiperSlide key={banner._id}>
-          <Mui.Box sx={{ position: 'relative' }}>
+          <Mui.Box sx={{ position: 'relative', overflow: 'hidden' }}>
             <Image
               src={banner.image}
               alt={banner.title}
-              width="1280"
-              height="500"
+              width={1280}
+              height={500}
+              // layout="fill"
               priority
+              style={{ objectFit: 'cover', width: '100%', height: '500px' }}
             />
             <Mui.Box
               className="textOverlay"
