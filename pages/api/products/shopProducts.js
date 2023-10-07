@@ -18,7 +18,7 @@ handler.get(async (req, res) => {
     const modifiedProducts = await Promise.all(
       products.map(async product => {
         const cloudPromise = product.images.map(async image => {
-          const cloudImage = await viewCloudinaryImage(image);
+          const cloudImage = viewCloudinaryImage(image);
           return cloudImage;
         });
 

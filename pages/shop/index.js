@@ -32,6 +32,8 @@ const Shop = () => {
   const [checkedBrands, setCheckedBrands] = useState([]);
   const [productBrands, setProductBrands] = useState([]);
 
+  const [visibleBrand, setVisibleBrand] = useState(4);
+
   // Category visibility
   const categoriesToShow =
     Array.isArray(categories) && categories.length >= 4
@@ -66,23 +68,6 @@ const Shop = () => {
   const minPriceValue = priceValue?.[0];
   const maxPriceValue = priceValue?.[1];
 
-  // const secretKey = process.env.NEXT_PUBLIC_CRYPTOJS_SECRET_KEY;
-
-  // Encryption with crypt-js NPM package
-  // const encryptionHandle = msg => {
-  //   const encryptInfo = CryptoJS.AES.encrypt(
-  //     JSON.stringify(msg),
-  //     secretKey
-  //   ).toString();
-  //   return encryptInfo;
-  // };
-
-  // const decryption = () => {
-  //   const bytes = CryptoJS.AES.decrypt(encryptedMessage, secretKey);
-  //   const decryptInfo = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
-  //   setDecryptedMessage(decryptInfo);
-  // };
-
   // Handle price slider
   const handleSlider = (event, newValue) => {
     setValue(newValue);
@@ -100,7 +85,7 @@ const Shop = () => {
     }
   };
 
-  // Slider handling
+  // Price slider handling
   useEffect(() => {
     async function fetchProductsByPrice() {
       try {
@@ -118,11 +103,25 @@ const Shop = () => {
     fetchProductsByPrice();
   }, [value]);
 
+  // Brands
+  console.log('BRANDS ==> ', productBrands);
+  const brandsToShow =
+    Array.isArray(productBrands) && productBrands.length >= 4
+      ? productBrands.slice(0, visibleBrand)
+      : productBrands;
+
+  const handleBrandMoreVisibility = () => {
+    setVisibleBrand(visibleBrand + 4);
+  };
+
+  const handleBrandLessVisibility = () => {
+    setVisibleBrand(4);
+  };
+
   // Fetching products according to brands
   useEffect(() => {
     try {
       const fetchBrands = async () => {
-        // console.log('CHECKED BRANDS', checkedBrands);
         const { data } = await axios.get(
           `/api/products/brand?brand=${checkedBrands}`
         );
@@ -181,21 +180,15 @@ const Shop = () => {
       }
     };
     fetchCategories();
-    // }
-
-    // return () => {
-    //   isDiscarded.current = true;
-    // };
   }, []);
 
   // For determining the maximum and minimum product price
   // const isOmitted = useRef(false);
   useEffect(() => {
-    // if (!isOmitted.current) {
     try {
       const fetchMaxMinPrice = async () => {
         const { data } = await axios.get('/api/products/maxMinPrice');
-        // console.log(data);
+
         const prices = [];
 
         // Calcualte price and convert decimal to integer
@@ -213,17 +206,11 @@ const Shop = () => {
       console.log(error);
       toast.error(error);
     }
-    // }
-
-    // return () => {
-    //   isOmitted.current = true;
-    // };
   }, []);
 
   // For fetching the product from backend
   // const isExpelled = useRef(false);
   useEffect(() => {
-    // if (!isExpelled.current) {
     try {
       const fetchProducts = async () => {
         const { data } = await axios.get('/api/products');
@@ -234,11 +221,6 @@ const Shop = () => {
     } catch (error) {
       toast.error(error);
     }
-    // }
-
-    // return () => {
-    //   isExpelled.current = true;
-    // };
   }, []);
 
   return (
@@ -252,7 +234,7 @@ const Shop = () => {
         {/* Sidebar of shop page */}
         <Grid item xs={12} md={3}>
           {/* Categories sidebar */}
-          {categoriesToShow.length > 0 && (
+          {categoriesToShow && categoriesToShow.length > 0 && (
             <>
               <Typography variant="h6" component="h6" marginBottom="10px">
                 By Categories
@@ -274,7 +256,7 @@ const Shop = () => {
                     </ListItemButton>
                   ))}
 
-                  {/* More and less button */}
+                  {/* More and less button for categories */}
                   <Box display="flex">
                     <Button
                       disabled={visibleCat >= categories.length}
@@ -342,7 +324,7 @@ const Shop = () => {
           )}
 
           {/* Brand sidebar */}
-          {productBrands.length > 0 && (
+          {brandsToShow.length > 0 && (
             <>
               <Typography
                 variant="h6"
@@ -363,7 +345,7 @@ const Shop = () => {
                     overflowY: 'auto',
                   }}
                 >
-                  {productBrands?.map(product => (
+                  {brandsToShow?.map(product => (
                     <FormControlLabel
                       key={uuidv4()}
                       label={`${product.brand} (${product.count})`}
@@ -377,6 +359,39 @@ const Shop = () => {
                     />
                   ))}
                 </FormGroup>
+                {/* More and less button for brands */}
+                <Box display="flex">
+                  <Button
+                    disabled={visibleBrand >= productBrands.length}
+                    onClick={handleBrandMoreVisibility}
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    fontSize="small"
+                    sx={{
+                      marginLeft: '10px',
+                      marginTop: '10px',
+                      display: 'block',
+                    }}
+                  >
+                    More
+                  </Button>
+                  <Button
+                    onClick={handleBrandLessVisibility}
+                    disabled={visibleBrand <= 4}
+                    variant="outlined"
+                    color="warning"
+                    size="small"
+                    fontSize="small"
+                    sx={{
+                      marginLeft: '10px',
+                      marginTop: '10px',
+                      display: 'block',
+                    }}
+                  >
+                    Less
+                  </Button>
+                </Box>
               </Paper>
             </>
           )}

@@ -6,8 +6,7 @@ import ProductCard from '../products/ProductCard';
 import PaginationMui from './PaginationMui';
 
 const ShopProducts = ({ products }) => {
-  const [{ numOfProductsShop }] = useStateValue();
-  const [pageSize, setPageSize] = useState({ from: 0, to: numOfProductsShop });
+  const [pageSize, setPageSize] = useState({ from: 0, to: 0 });
 
   return (
     <>
