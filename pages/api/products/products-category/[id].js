@@ -11,13 +11,13 @@ handler.get(async (req, res) => {
     // console.log('CATEGORY ID ==> ', categoryId);
     db.connect();
     const products = await Product.find({ categories: categoryId });
-    db.disconnect();
+    // db.disconnect();
 
     // Fetch images from cloudinary
     const updatedProducts = await Promise.all(
       products.map(async product => {
         const cloudImages = product.images.map(async image => {
-          const cloudPromise = await viewCloudinaryImage(image);
+          const cloudPromise = viewCloudinaryImage(image);
           return cloudPromise;
         });
 

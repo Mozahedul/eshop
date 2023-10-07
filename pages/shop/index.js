@@ -55,6 +55,7 @@ const Shop = () => {
       const { data } = await axios.get(
         `/api/products/products-category/${catId}`
       );
+
       setProducts(data);
     } catch (error) {
       toast.error(error);
@@ -119,8 +120,6 @@ const Shop = () => {
 
   // Fetching products according to brands
   useEffect(() => {
-    // let isDiscarded = false;
-    // if (!isDiscarded) {
     try {
       const fetchBrands = async () => {
         // console.log('CHECKED BRANDS', checkedBrands);
@@ -133,11 +132,6 @@ const Shop = () => {
     } catch (error) {
       toast.error(error);
     }
-    // }
-
-    // return () => {
-    //   isDiscarded = true;
-    // };
   }, [checkedBrands]);
 
   // Showing all brands
@@ -279,6 +273,8 @@ const Shop = () => {
                       {category.name} ({category.productCount})
                     </ListItemButton>
                   ))}
+
+                  {/* More and less button */}
                   <Box display="flex">
                     <Button
                       disabled={visibleCat >= categories.length}
@@ -360,7 +356,7 @@ const Shop = () => {
               <Paper sx={{ padding: '10px' }}>
                 <FormGroup
                   sx={{
-                    height: '200px',
+                    // height: '200px',
                     display: 'flex',
                     flexDirection: 'column',
                     flexWrap: 'nowrap',
