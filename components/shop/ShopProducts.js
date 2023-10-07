@@ -12,11 +12,12 @@ const ShopProducts = ({ products }) => {
   return (
     <>
       <Grid container spacing={2}>
-        {products?.slice(pageSize.from, pageSize.to).map(product => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
-            <ProductCard product={product} />
-          </Grid>
-        ))}
+        {products.length > 0 &&
+          products?.slice(pageSize.from, pageSize.to).map(product => (
+            <Grid item xs={12} sm={6} md={4} lg={3} key={uuidv4()}>
+              <ProductCard product={product} />
+            </Grid>
+          ))}
       </Grid>
       <Stack spacing={2} alignItems="center" marginTop="60px">
         <PaginationMui products={products} setPageSize={setPageSize} />

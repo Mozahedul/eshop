@@ -85,19 +85,6 @@ const Shop = () => {
   // Handle price slider
   const handleSlider = (event, newValue) => {
     setValue(newValue);
-
-    async function fetchProductsByPrice() {
-      try {
-        const { data } = await axios.get(
-          `/api/products/shopProducts?priceArr=${newValue}`
-        );
-        setProducts(data);
-      } catch (error) {
-        toast.error(error);
-      }
-    }
-
-    fetchProductsByPrice();
   };
 
   // handle the checkbox selection
@@ -111,6 +98,24 @@ const Shop = () => {
       setCheckedBrands([...checkedBrands, brand]);
     }
   };
+
+  // Slider handling
+  useEffect(() => {
+    async function fetchProductsByPrice() {
+      try {
+        const { data } = await axios.get(
+          `/api/products/shopProducts?priceArr=${value}`
+        );
+
+        console.log('SLIDER DATA ==> ', data);
+        setProducts(data);
+      } catch (error) {
+        toast.error(error);
+      }
+    }
+
+    fetchProductsByPrice();
+  }, [value]);
 
   // Fetching products according to brands
   useEffect(() => {

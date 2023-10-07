@@ -172,7 +172,7 @@ const PlaceOrder = () => {
         Place order
       </Typography>
       {Object.keys(shipAddress).length &&
-      paymentMeth !== '' &&
+      paymentMeth &&
       shoppingCartItems?.length ? (
         <Grid container spacing={2}>
           <Grid item md={9} xs={12}>

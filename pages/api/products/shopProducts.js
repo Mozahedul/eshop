@@ -27,7 +27,7 @@ handler.get(async (req, res) => {
       })
     );
 
-    db.disconnect();
+    // db.disconnect();
 
     if (res.statusCode >= 200 && res.statusCode <= 299) {
       res.send(modifiedProducts);
