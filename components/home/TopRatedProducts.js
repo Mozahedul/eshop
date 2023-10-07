@@ -18,37 +18,21 @@ const TopRatedProducts = ({ pixel, setPixel }) => {
   const [topRated, setTopRated] = useState([]);
 
   useEffect(() => {
-    // const source = axios.CancelToken.source();
     setPixel(deviceDimension());
     try {
       const fetchTopRatedProducts = async () => {
-        const response = await axios(
-          { method: 'get', url: '/api/home/top-rated' }
-          // { cancelToken: source.token }
-        );
-        if (response.statusText === 'OK') {
-          setTopRated(response.data);
-        } else {
-          toast.error(response.data.errMsg, {
-            position: 'top-center',
-            autoClose: 1000,
-            pauseOnHover: true,
-            theme: 'colored',
-          });
-        }
+        const response = await axios({
+          method: 'get',
+          url: '/api/home/top-rated',
+        });
+
+        const topProducts = await response.data;
+        setTopRated(topProducts);
       };
       fetchTopRatedProducts();
     } catch (error) {
-      if (axios.isCancel(error)) {
-        console.log(error);
-      } else {
-        console.log('Error without axios ==> ', error);
-      }
+      console.log(error);
     }
-
-    // return () => {
-    //   source.cancel();
-    // };
   }, [setTopRated, setPixel]);
   return topRated && Array.isArray(topRated) && topRated.length > 0 ? (
     <>
