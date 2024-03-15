@@ -59,61 +59,63 @@ const HomeSlider = () => {
       centeredSlides
       modules={[Autoplay, Pagination, Navigation]}
     >
-      {bannerData?.map(banner => (
-        <SwiperSlide key={banner._id}>
-          <Mui.Box sx={{ position: 'relative', overflow: 'hidden' }}>
-            <Image
-              src={banner.image}
-              alt={banner.title}
-              width={1280}
-              height={500}
-              // layout="fill"
-              priority
-              style={{ objectFit: 'cover', width: '100%', height: '500px' }}
-            />
-            <Mui.Box
-              className="textOverlay"
-              sx={{
-                backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                padding: { xs: '10px 15px', lg: '30px' },
-                borderRadius: '10px',
-                textAlign: 'center',
-              }}
-            >
-              <Mui.Typography
+      {Array.isArray(bannerData) &&
+        bannerData.length > 0 &&
+        bannerData?.map(banner => (
+          <SwiperSlide key={banner._id}>
+            <Mui.Box sx={{ position: 'relative', overflow: 'hidden' }}>
+              <Image
+                src={banner.image}
+                alt={banner.title}
+                width={1280}
+                height={500}
+                // layout="fill"
+                priority
+                style={{ objectFit: 'cover', width: '100%', height: '500px' }}
+              />
+              <Mui.Box
+                className="textOverlay"
                 sx={{
-                  fontWeight: 'bold',
-                  fontSize: { xs: '18px', lg: '48px' },
-                  lineHeight: { xs: '20px', lg: '48px' },
-                  color: 'white',
+                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                  padding: { xs: '10px 15px', lg: '30px' },
+                  borderRadius: '10px',
                   textAlign: 'center',
                 }}
               >
-                {banner.title}
-              </Mui.Typography>
-              <Mui.Typography
-                sx={{
-                  textAlign: 'center',
-                  color: 'white',
-                  fontSize: { xs: '14px', lg: '20px' },
-                  lineHeight: '18px',
-                  marginTop: '10px',
-                }}
-              >
-                {banner.subtitle}
-              </Mui.Typography>
-              <Mui.Button
-                variant="contained"
-                size="small"
-                sx={{ marginTop: '15px' }}
-                onClick={() => router.push('/shop')}
-              >
-                Shop Now
-              </Mui.Button>
+                <Mui.Typography
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: { xs: '18px', lg: '48px' },
+                    lineHeight: { xs: '20px', lg: '48px' },
+                    color: 'white',
+                    textAlign: 'center',
+                  }}
+                >
+                  {banner.title}
+                </Mui.Typography>
+                <Mui.Typography
+                  sx={{
+                    textAlign: 'center',
+                    color: 'white',
+                    fontSize: { xs: '14px', lg: '20px' },
+                    lineHeight: '18px',
+                    marginTop: '10px',
+                  }}
+                >
+                  {banner.subtitle}
+                </Mui.Typography>
+                <Mui.Button
+                  variant="contained"
+                  size="small"
+                  sx={{ marginTop: '15px' }}
+                  onClick={() => router.push('/shop')}
+                >
+                  Shop Now
+                </Mui.Button>
+              </Mui.Box>
             </Mui.Box>
-          </Mui.Box>
-        </SwiperSlide>
-      ))}
+          </SwiperSlide>
+        ))}
     </Swiper>
   );
 };

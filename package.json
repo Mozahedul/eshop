@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "install-all":"npm install --legacy-peer-deps",
     "eslint": "npm i -D prettier && npm i -D eslint-plugin-prettier && npm i -D eslint-config-prettier && npm i -D eslint-plugin-node && npm i -D eslint-config-node && npm i -D @babel/eslint-parser"
   },
   "dependencies": {

@@ -8,5 +8,7 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true
   },
-  "hide-files.files": []
+  "hide-files.files": [],
+  "editor.fontSize": 13,
+  "editor.fontFamily": "'JetBrains Mono',Consolas, 'Courier New', monospace"
 }
