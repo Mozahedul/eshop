@@ -1,14 +1,14 @@
-import Link from 'next/link';
-import React, { useRef, useState } from 'react';
 import AddShoppingCartRoundedIcon from '@mui/icons-material/AddShoppingCartRounded';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import AutorenewRoundedIcon from '@mui/icons-material/AutorenewRounded';
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import * as Mui from '../muiImportComponents/ProductMUI';
+import React, { useRef, useState } from 'react';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
-import StarRating from '../StarRating';
+import * as Mui from '../muiImportComponents/ProductMUI';
 import ProductDialog from '../ProductDialog';
+import StarRating from '../StarRating';
 
 const ProductCard = ({ product }) => {
   const router = useRouter();
@@ -28,8 +28,8 @@ const ProductCard = ({ product }) => {
 
   console.log('PRODUCT => ', product);
 
-  const addToCartHandler = (productAdd, newState) => {
-    // console.log('INDEX.JS ==>', productAdd);
+  const addToCartHandler = (event, productAdd, newState) => {
+    event.stopPropagation();
     setMenuState({ ...newState, open: true });
     if (productAdd) {
       dispatch({
@@ -37,7 +37,7 @@ const ProductCard = ({ product }) => {
         payload: { ...productAdd, quantity: 1 },
       });
     }
-    // router.push('/cart');
+    return true;
   };
 
   // Close snackbar
@@ -69,8 +69,11 @@ const ProductCard = ({ product }) => {
 
   // Click on product cart and move to product details page
   const handleProductClick = event => {
-    event.stopPropagation();
-    router.push(`/product/${product.slug}`);
+    // event.preventDefault();
+    // event.stopPropagation();
+    if (event.currentTarget) {
+      router.push(`/product/${product.slug}`);
+    }
   };
 
   // Cart exist checking
@@ -92,8 +95,9 @@ const ProductCard = ({ product }) => {
       ) : (
         <Mui.IconButton
           sx={{ color: 'white' }}
-          onClick={() =>
-            addToCartHandler(productCart, {
+          onClick={event =>
+            // eslint-disable-next-line no-restricted-globals
+            addToCartHandler(event, productCart, {
               vertical: 'top',
               horizontal: 'center',
             })
@@ -154,11 +158,17 @@ const ProductCard = ({ product }) => {
             />
             {/* Wishlist Icon */}
             <Mui.IconButton sx={{ color: 'white' }}>
-              <FavoriteBorderRoundedIcon fontSize="small" />
+              <FavoriteBorderRoundedIcon
+                fontSize="small"
+                onClick={event => event.stopPropagation()}
+              />
             </Mui.IconButton>
             {/* Compare Icon */}
             <Mui.IconButton sx={{ color: 'white' }}>
-              <AutorenewRoundedIcon fontSize="small" />
+              <AutorenewRoundedIcon
+                fontSize="small"
+                onClick={event => event.stopPropagation()}
+              />
             </Mui.IconButton>
             {/* Shopping cart icon */}
             {cartExistHandler(product)}

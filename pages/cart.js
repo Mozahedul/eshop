@@ -109,12 +109,12 @@ const CartScreen = () => {
                 </TableHead>
                 <TableBody>
                   {cartItems?.map(item => (
-                    <TableRow key={item._id}>
+                    <TableRow key={item?._id}>
                       <TableCell>
-                        <Link href={`/product/${item.slug}`}>
+                        <Link href={`/product/${item?.slug}`}>
                           <Image
-                            src={item.images[0]}
-                            alt={item.title}
+                            src={item?.images?.[0]}
+                            alt={item?.title}
                             width="50"
                             height="50"
                             priority
@@ -122,18 +122,18 @@ const CartScreen = () => {
                         </Link>
                       </TableCell>
                       <TableCell>
-                        <Link href={`/product/${item.slug}`}>
-                          <Typography variant="body1">{item.title}</Typography>
+                        <Link href={`/product/${item?.slug}`}>
+                          <Typography variant="body1">{item?.title}</Typography>
                         </Link>
                       </TableCell>
                       <TableCell align="right">
                         <Select
-                          value={item.quantity}
+                          value={item?.quantity}
                           onChange={event =>
                             updateCartHandler(item, event.target.value)
                           }
                         >
-                          {[...Array(item.countInStock).keys()].map(x => (
+                          {[...Array(item?.countInStock).keys()].map(x => (
                             <MenuItem key={x + 1} value={x + 1}>
                               {x + 1}
                             </MenuItem>
@@ -142,8 +142,8 @@ const CartScreen = () => {
                       </TableCell>
                       <TableCell align="right">
                         <Typography variant="body1" color="secondary">
-                          {`${item.quantity} X ${getUptoTwoDecimal(
-                            item.price
+                          {`${item?.quantity} X ${getUptoTwoDecimal(
+                            item?.price
                           )} = `}
                           ${getUptoTwoDecimal(item.price * item.quantity)}
                         </Typography>
