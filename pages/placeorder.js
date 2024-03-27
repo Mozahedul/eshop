@@ -131,6 +131,8 @@ const PlaceOrder = () => {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [];
 
+    console.log('CART ITEM COOKIES --> ', cartItemCookie);
+
     setShoppingCartItems(cartItemCookie);
     // }
     // return () => {
@@ -147,7 +149,7 @@ const PlaceOrder = () => {
 
     console.log(Object.keys(shipAddress));
     console.log(paymentMeth);
-    console.log(shoppingCartItems);
+    console.log('SHOPPING CART ITEMS ==> ', shoppingCartItems);
 
     if (
       Object.keys(shipAddress).length < 1 &&
@@ -220,7 +222,7 @@ const PlaceOrder = () => {
                     </TableHead>
                     <TableBody>
                       {shoppingCartItems?.map(item => (
-                        <TableRow key={Date.now()}>
+                        <TableRow key={item.slug}>
                           <TableCell>
                             <Link href={`/product/${item.slug}`}>
                               <Image
