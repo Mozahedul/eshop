@@ -8,6 +8,8 @@ const addToCartHandle = async (product, dispatch, qty, router) => {
       url: `/api/products/${product._id}`,
     });
 
+    console.log('RESPONSE STATUS TEXT ==> ', response.statusText);
+
     if (response.statusText === 'OK') {
       dispatch({
         type: 'CART_ITEM_ADDED',
