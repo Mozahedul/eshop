@@ -8,7 +8,7 @@ const addToCartHandle = async (product, dispatch, qty, router) => {
       url: `/api/products/${product._id}`,
     });
 
-    if (response.statusText === 'OK') {
+    if (response.status === 200) {
       dispatch({
         type: 'CART_ITEM_ADDED',
         payload: { ...product, quantity: qty },
