@@ -85,10 +85,8 @@ const ProductScreen = props => {
   };
 
   // Add product to shopping cart function
-  const handleAddToCart = () => {
-    addToCartHandle(product, dispatch, qty, router);
-  };
 
+  const handleAddToCart = () => addToCartHandle(product, dispatch, qty, router);
   // submit rating form handler
   const reviewSubmitHandle = ratingData => {
     handleReviewSubmit(ratingData, product, axios, toast, userToken, dispatch);

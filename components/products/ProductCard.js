@@ -157,18 +157,18 @@ const ProductCard = ({ product }) => {
               cartRef={cartRef}
             />
             {/* Wishlist Icon */}
-            <Mui.IconButton sx={{ color: 'white' }}>
-              <FavoriteBorderRoundedIcon
-                fontSize="small"
-                onClick={event => event.stopPropagation()}
-              />
+            <Mui.IconButton
+              onClick={event => event.stopPropagation()}
+              sx={{ color: 'white' }}
+            >
+              <FavoriteBorderRoundedIcon fontSize="small" />
             </Mui.IconButton>
             {/* Compare Icon */}
-            <Mui.IconButton sx={{ color: 'white' }}>
-              <AutorenewRoundedIcon
-                fontSize="small"
-                onClick={event => event.stopPropagation()}
-              />
+            <Mui.IconButton
+              onClick={event => event.stopPropagation()}
+              sx={{ color: 'white' }}
+            >
+              <AutorenewRoundedIcon fontSize="small" />
             </Mui.IconButton>
             {/* Shopping cart icon */}
             {cartExistHandler(product)}
