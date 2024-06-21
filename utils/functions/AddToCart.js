@@ -19,7 +19,7 @@ const addToCartHandle = async (product, dispatch, qty, router) => {
   } catch (error) {
     console.log('Request cancelled ==> ', error.message);
   }
-  return true;
+  // return true;
 };
 
 export default addToCartHandle;
