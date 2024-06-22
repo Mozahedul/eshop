@@ -34,7 +34,7 @@ const HomeSlider = () => {
         // }
       } catch (error) {
         // if (axios.isCancel(error)) {
-        console.log('Request cancelled ==> ', error.message);
+        // console.log('Request cancelled ==> ', error.message);
         // } else {
         //   console.log('Error without axios ==> ', error.message);
         // }

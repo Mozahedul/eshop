@@ -7,16 +7,16 @@ const PaginationMui = ({ products, pageSize, setPageSize }) => {
   const [page, setPage] = useState(1);
   const [{ numOfProductsPerPage }, dispatch] = useStateValue();
 
-  console.log('PRODUCTS PER PAGE ==> ', numOfProductsPerPage);
+  // console.log('PRODUCTS PER PAGE ==> ', numOfProductsPerPage);
 
   // change the page with a fixed number of images
   const handlePage = (event, value) => {
-    console.log('VALUE ==>', value);
+    // console.log('VALUE ==>', value);
 
     setPage(value);
     const pageFrom = (value - 1) * numOfProductsPerPage;
     const pageTo = pageFrom + numOfProductsPerPage;
-    console.log('PAGE FROM & TO ==> ', pageFrom, pageTo);
+    // console.log('PAGE FROM & TO ==> ', pageFrom, pageTo);
     setPageSize({ ...pageSize, from: pageFrom, to: pageTo });
   };
 

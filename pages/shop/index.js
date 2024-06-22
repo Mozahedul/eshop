@@ -40,7 +40,7 @@ const Shop = () => {
       ? categories.slice(0, visibleCat)
       : categories;
 
-  console.log('CATEGORIES TO SHOW ==> ', categoriesToShow);
+  // console.log('CATEGORIES TO SHOW ==> ', categoriesToShow);
 
   const handleCatVisibility = () => {
     setVisibleCat(visibleCat + 4);
@@ -93,7 +93,7 @@ const Shop = () => {
           `/api/products/shopProducts?priceArr=${value}`
         );
 
-        console.log('SLIDER DATA ==> ', data);
+        // console.log('SLIDER DATA ==> ', data);
         setProducts(data);
       } catch (error) {
         toast.error(error);
@@ -104,7 +104,7 @@ const Shop = () => {
   }, [value]);
 
   // Brands
-  console.log('BRANDS ==> ', productBrands);
+  // console.log('BRANDS ==> ', productBrands);
   const brandsToShow =
     Array.isArray(productBrands) && productBrands.length >= 4
       ? productBrands.slice(0, visibleBrand)
@@ -197,7 +197,7 @@ const Shop = () => {
 
         const maxPrice = data.length > 0 ? Math.ceil(data[0].maxPrice) : 0;
         prices.push(maxPrice);
-        console.log('PRICE ==> ', prices);
+        // console.log('PRICE ==> ', prices);
         setValue(prices);
         setPriceValue(prices);
       };

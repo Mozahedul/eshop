@@ -45,7 +45,7 @@ handler.put(async (req, res) => {
     await db.connect();
     const { removedCatImage } = req.body;
 
-    console.log(req.file);
+    // console.log(req.file);
 
     // Remove images from cloudinary
     removedCatImage.map(removeImg => {

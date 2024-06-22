@@ -38,7 +38,7 @@ const OrderHistory = () => {
 
   const userDetails = userInfo || cookieUser;
 
-  console.log(userDetails);
+  // console.log(userDetails);
 
   useEffect(() => {
     // if (!userInfo) {

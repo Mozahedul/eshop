@@ -35,7 +35,7 @@ const NewArrival = ({ pixel, setPixel }) => {
         // }
       } catch (error) {
         // if (axios.isCancel(error)) {
-        console.log('Request not completed ==> ', error.message);
+        // console.log('Request not completed ==> ', error.message);
         // } else {
         // console.log('Error without axios ==> ', error.message);
         // }

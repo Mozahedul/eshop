@@ -19,7 +19,7 @@ handler.delete(async (req, res) => {
       // Delete image from cloudinary
       deleteCloudinaryImage(bannerExist.image);
 
-      console.log('BANNER DELETED ==> ', bannerExist);
+      // console.log('BANNER DELETED ==> ', bannerExist);
 
       if (res.statusCode >= 200 && res.statusCode <= 299) {
         res.send({ message: 'Banner deleted successfully' });

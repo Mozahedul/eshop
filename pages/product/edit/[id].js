@@ -175,7 +175,7 @@ const Edit = () => {
             headers: { authorization: `Bearer ${userToken}` },
           });
 
-          console.log('DATA FROM PRODUCT EDIT ==> ', data);
+          // console.log('DATA FROM PRODUCT EDIT ==> ', data);
 
           // console.log('PRODUCT DATA => ', data);
           setValue('title', data.title);

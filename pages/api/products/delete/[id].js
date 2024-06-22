@@ -18,7 +18,7 @@ handler.delete(async (req, res) => {
     await db.connect();
     // Check the product existence in database
     const productExist = await Product.findById({ _id: req.query.id });
-    console.log('PRODUCT EXISTS ==> ', productExist);
+    // console.log('PRODUCT EXISTS ==> ', productExist);
     if (productExist) {
       const productDeleted = await Product.findByIdAndRemove({
         _id: req.query.id,

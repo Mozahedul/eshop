@@ -54,11 +54,11 @@ handler.post(upload.array('avatar', 10), async function (req, res) {
         }
       });
 
-      console.log('UPLOAD PROMISES ==> ', uploadPromises);
+      // console.log('UPLOAD PROMISES ==> ', uploadPromises);
 
       // Images returned from cloudinary with public_id
       const cloudImages = await Promise.all(uploadPromises);
-      console.log(cloudImages);
+      // console.log(cloudImages);
 
       const product = new Product({
         title,

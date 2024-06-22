@@ -57,7 +57,7 @@ const Edit = () => {
 
         router.push('/home-slider/view');
       }
-      console.log('DATA BANNER SUBMIT ==> ', data);
+      // console.log('DATA BANNER SUBMIT ==> ', data);
     } catch (err) {
       toast.error(getError(err), {
         position: 'top-center',

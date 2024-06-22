@@ -9,7 +9,7 @@ import Layout from '../../components/Layout';
 const Category = () => {
   const router = useRouter();
   const [products, setProducts] = useState([]);
-  console.log('FETCH Products ==> ', products);
+  // console.log('FETCH Products ==> ', products);
 
   const { categoryId, name } = router.query;
   const secretKey = process.env.NEXT_PUBLIC_CRYPTOJS_SECRET_KEY;

@@ -21,7 +21,7 @@ handler.post(upload.array('catImages', 6), async (req, res) => {
     });
 
     const cloudinaryImages = await Promise.all(cloudImages);
-    console.log('CLOUD IMAGE  ==> ', cloudinaryImages);
+    // console.log('CLOUD IMAGE  ==> ', cloudinaryImages);
 
     // Create image link from cloudinary with public_id
     const updatedImages = cloudinaryImages.map(image => {
@@ -29,7 +29,7 @@ handler.post(upload.array('catImages', 6), async (req, res) => {
       return cloudPromise;
     });
 
-    console.log(updatedImages);
+    // console.log(updatedImages);
     if (res.statusCode >= 200 && res.statusCode <= 299) {
       res.send(updatedImages);
     } else {

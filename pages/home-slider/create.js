@@ -29,7 +29,7 @@ const Create = () => {
     : '';
 
   const userToken = userInfo || tokenStorage;
-  console.log('USER TOKEN CLIENT ==> ', userToken);
+  // console.log('USER TOKEN CLIENT ==> ', userToken);
 
   const submitBannerHandler = async banner => {
     const formData = new FormData();
@@ -38,7 +38,7 @@ const Create = () => {
     formData.append('subtitle', banner.subtitle);
     formData.append('avatar', banner.avatar[0]);
 
-    console.log('FORM DATA ==> ', formData);
+    // console.log('FORM DATA ==> ', formData);
 
     try {
       const { data } = await axios.post('/api/home-slider/create', formData, {

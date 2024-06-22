@@ -41,7 +41,7 @@ const ProductScreen = props => {
     useStateValue();
   const { product } = props;
 
-  console.log('PRODUCT FROM SLUG ==> ', product);
+  // console.log('PRODUCT FROM SLUG ==> ', product);
 
   const {
     handleSubmit,
@@ -95,14 +95,14 @@ const ProductScreen = props => {
     //   });
 
     //   if (response.status === 200) {
-    console.log('Dispatched the products ==> ', { product, quantity: qty });
+    // console.log('Dispatched the products ==> ', { product, quantity: qty });
 
     // dispatch({
     //   type: 'CART_ITEM_ADDED',
     //   payload: { ...product, quantity: qty },
     // });
 
-    console.log('navigate to the cart page');
+    // console.log('navigate to the cart page');
     router.push('/cart');
     // }
     // } catch (err) {

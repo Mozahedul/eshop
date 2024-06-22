@@ -29,7 +29,7 @@ handler.post(upload.array('avatar', 6), async function (req, res) {
       const cloudPromise =
         Array.isArray(req.files) &&
         req?.files?.map(async file => {
-          console.log('FILE INSIDE MAP ==> ', file);
+          // console.log('FILE INSIDE MAP ==> ', file);
           const publicId = await uploadImage(file.path);
           return publicId;
         });

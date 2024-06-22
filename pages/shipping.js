@@ -34,7 +34,7 @@ const Shipping = () => {
 
   // handle shipping function
   const shippingSubmitHandler = data => {
-    console.log('DATA FROM SUBMIT HANDLER ==> ', data);
+    // console.log('DATA FROM SUBMIT HANDLER ==> ', data);
 
     const { fullName, address, city, postalCode, country } = data;
 

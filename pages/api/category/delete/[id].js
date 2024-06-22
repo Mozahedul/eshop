@@ -26,8 +26,8 @@ handler.delete(async (req, res) => {
         _id: req.query.id,
       }).exec();
 
-      console.log('DELETE CATEGORY ==> ', delCategory);
-      console.log('RESPONSE CATEGORY => ', res);
+      // console.log('DELETE CATEGORY ==> ', delCategory);
+      // console.log('RESPONSE CATEGORY => ', res);
       // Delete images from cloudinary
       categoryExist.image.length > 0 &&
         categoryExist.image.map(file => deleteCloudinaryImage(file));

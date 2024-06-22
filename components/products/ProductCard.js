@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
     cart: { cartItems },
   } = state;
 
-  console.log('PRODUCT => ', product);
+  // console.log('PRODUCT => ', product);
 
   const addToCartHandler = (event, productAdd, newState) => {
     event.stopPropagation();

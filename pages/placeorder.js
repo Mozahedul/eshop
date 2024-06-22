@@ -32,7 +32,7 @@ const PlaceOrder = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  console.log('SHOPPING CART ==> ', shoppingCartItems);
+  // console.log('SHOPPING CART ==> ', shoppingCartItems);
 
   const { userInfo } = state;
 
@@ -43,7 +43,7 @@ const PlaceOrder = () => {
 
   // Tax count from cart items
   const taxCounter = ((itemsPrice * 15) / 100).toFixed(2);
-  console.log(taxCounter);
+  // console.log(taxCounter);
 
   // calculation of shipping price from cart items
   const shippingPriceCount = itemsPrice > 200 ? 0 : 15;
@@ -78,7 +78,7 @@ const PlaceOrder = () => {
         }
       );
 
-      console.log('DATA', data);
+      // console.log('DATA', data);
 
       // Remove cart items from Global state
       dispatch({
@@ -131,7 +131,7 @@ const PlaceOrder = () => {
       ? JSON.parse(localStorage.getItem('cartItems'))
       : [];
 
-    console.log('CART ITEM COOKIES --> ', cartItemCookie);
+    // console.log('CART ITEM COOKIES --> ', cartItemCookie);
 
     setShoppingCartItems(cartItemCookie);
     // }
@@ -147,9 +147,9 @@ const PlaceOrder = () => {
     // payment method is absent, then we will redirect
     // to home page
 
-    console.log(Object.keys(shipAddress));
-    console.log(paymentMeth);
-    console.log('SHOPPING CART ITEMS ==> ', shoppingCartItems);
+    // console.log(Object.keys(shipAddress));
+    // console.log(paymentMeth);
+    // console.log('SHOPPING CART ITEMS ==> ', shoppingCartItems);
 
     if (
       Object.keys(shipAddress).length < 1 &&

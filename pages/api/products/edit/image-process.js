@@ -17,10 +17,10 @@ export const config = {
 handler.use(isAuth);
 handler.post(upload.array('avatar', 6), async (req, res) => {
   // Send images to cloudinary
-  console.log('REQUEST FILES ==> ', req.files);
+  // console.log('REQUEST FILES ==> ', req.files);
   const cloudPromise = req.files.map(async file => {
     const cloudImage = await uploadImage(file.path);
-    console.log('CLOUD IMAGE ==> ', cloudImage);
+    // console.log('CLOUD IMAGE ==> ', cloudImage);
     return cloudImage;
   });
 

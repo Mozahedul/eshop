@@ -88,7 +88,7 @@ const Create = () => {
     const str = editorContent?.replace(regex, '');
     const tinymceWordsCount = str?.trim().split(' ');
 
-    console.log('WORDS COUNT TINYMCE ==> ', tinymceWordsCount);
+    // console.log('WORDS COUNT TINYMCE ==> ', tinymceWordsCount);
 
     // setEditorTouched(true);
     if (tinymceWordsCount.length < 5) {
