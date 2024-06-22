@@ -86,26 +86,26 @@ const ProductScreen = props => {
 
   // Add product to shopping cart function
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     // addToCartHandle(product, dispatch, qty, router);
-    try {
-      const response = await axios({
-        method: 'get',
-        url: `/api/products/${product._id}`,
-      });
+    // try {
+    //   const response = await axios({
+    //     method: 'get',
+    //     url: `/api/products/${product._id}`,
+    //   });
 
-      if (response.status === 200) {
-        dispatch({
-          type: 'CART_ITEM_ADDED',
-          payload: { ...product, quantity: qty },
-        });
+    //   if (response.status === 200) {
+    dispatch({
+      type: 'CART_ITEM_ADDED',
+      payload: { ...product, quantity: qty },
+    });
 
-        router.push('/cart');
-      }
-    } catch (err) {
-      console.log('Request cancelled ==> ', err.message);
-    }
-    return true;
+    router.push('/cart');
+    // }
+    // } catch (err) {
+    //   console.log('Request cancelled ==> ', err.message);
+    // }
+    // return true;
   };
 
   // submit rating form handler
