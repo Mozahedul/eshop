@@ -16,7 +16,7 @@ import Product from '../../models/Product';
 import { useStateValue } from '../../utils/contextAPI/StateProvider';
 import db from '../../utils/db';
 import convertDate from '../../utils/functions/dateConverter';
-import addToCartHandle from '../../utils/functions/AddToCart';
+// import addToCartHandle from '../../utils/functions/AddToCart';
 import handleReviewSubmit from '../../utils/functions/ReviewSubmitHandle';
 import Breadcrumbs from '../../components/Breadcrumbs';
 import Layout from '../../components/Layout';
@@ -86,7 +86,27 @@ const ProductScreen = props => {
 
   // Add product to shopping cart function
 
-  const handleAddToCart = () => addToCartHandle(product, dispatch, qty, router);
+  const handleAddToCart = async () => {
+    // addToCartHandle(product, dispatch, qty, router);
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `/api/products/${product._id}`,
+      });
+
+      if (response.status === 200) {
+        dispatch({
+          type: 'CART_ITEM_ADDED',
+          payload: { ...product, quantity: qty },
+        });
+
+        router.push('/cart');
+      }
+    } catch (err) {
+      console.log('Request cancelled ==> ', err.message);
+    }
+    return true;
+  };
 
   // submit rating form handler
   const reviewSubmitHandle = ratingData => {
