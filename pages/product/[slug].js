@@ -102,7 +102,7 @@ const ProductScreen = props => {
     //   payload: { ...product, quantity: qty },
     // });
 
-    // console.log('navigate to the cart page');
+    console.log('navigate to the cart page');
     router.push('/cart');
     // }
     // } catch (err) {
