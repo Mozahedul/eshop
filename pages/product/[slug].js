@@ -378,7 +378,7 @@ const ProductScreen = props => {
             {/* <Mui.ListItem> */}
             <Mui.Box sx={{ marginTop: '10px' }}>
               <Mui.Button
-                onClick={handleAddToCart}
+                onClick={event => handleAddToCart(event)}
                 variant="contained"
                 color="primary"
                 disabled={product.countInStock <= 0}
