@@ -95,11 +95,14 @@ const ProductScreen = props => {
     //   });
 
     //   if (response.status === 200) {
+    console.log('Dispatched the products ==> ', { product, quantity: qty });
+
     dispatch({
       type: 'CART_ITEM_ADDED',
       payload: { ...product, quantity: qty },
     });
 
+    console.log('navigate to the cart page');
     router.push('/cart');
     // }
     // } catch (err) {
