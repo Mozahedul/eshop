@@ -103,7 +103,7 @@ const ProductScreen = props => {
         });
 
         console.log('navigate to the cart page');
-        router.push('https://eshop-mozahedul.vercel.app/cart');
+        router.push('/cart');
       }
     } catch (err) {
       console.log('Request cancelled ==> ', err.message);
