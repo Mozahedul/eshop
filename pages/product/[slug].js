@@ -86,28 +86,28 @@ const ProductScreen = props => {
 
   // Add product to shopping cart function
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     // addToCartHandle(product, dispatch, qty, router);
-    // try {
-    //   const response = await axios({
-    //     method: 'get',
-    //     url: `/api/products/${product._id}`,
-    //   });
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `/api/products/${product._id}`,
+      });
 
-    //   if (response.status === 200) {
-    // console.log('Dispatched the products ==> ', { product, quantity: qty });
+      if (response.status === 200) {
+        console.log('Dispatched the products ==> ', { product, quantity: qty });
 
-    // dispatch({
-    //   type: 'CART_ITEM_ADDED',
-    //   payload: { ...product, quantity: qty },
-    // });
+        dispatch({
+          type: 'CART_ITEM_ADDED',
+          payload: { ...product, quantity: qty },
+        });
 
-    console.log('navigate to the cart page');
-    router.push('https://eshop-mozahedul.vercel.app/cart');
-    // }
-    // } catch (err) {
-    //   console.log('Request cancelled ==> ', err.message);
-    // }
+        console.log('navigate to the cart page');
+        router.push('https://eshop-mozahedul.vercel.app/cart');
+      }
+    } catch (err) {
+      console.log('Request cancelled ==> ', err.message);
+    }
     // return true;
   };
 
